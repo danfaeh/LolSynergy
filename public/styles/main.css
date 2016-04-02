@@ -8,6 +8,12 @@ h2, h3, h4, p {
 	text-align: center;
 }
 
+.navbar{
+	position: fixed;
+	width: 100%;
+	z-index: 2;
+}
+
 .champ_imgs{
 	height: 60px;
 	width: 60px;
@@ -15,15 +21,15 @@ h2, h3, h4, p {
 	margin: 5px;
 }
 
-#content_info{
-	margin-top: 80px;
+#page_content{
+	position: relative;
+	top: 60px;
 }
 
 #menu_wrapper{
 	z-index: 1;
 	text-align: center;
 	left: 20px;
-	bottom: 80px;
 }
 
 #count_message {
