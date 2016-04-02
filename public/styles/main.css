@@ -1,0 +1,90 @@
+body {
+	background: url("../images/cover.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+h2, h3, h4, p {
+	color: white;
+}
+
+.champ_imgs{
+	height: 60px;
+	width: 60px;
+	float: left;
+	margin: 5px;
+}
+
+
+
+#content_info{
+	margin-top: 80px;
+}
+
+#menu_wrapper{
+	z-index: 8888;
+}
+
+#count_message {
+	text-align: center;
+}
+
+#frame{
+  position: fixed;
+  top: 11%;
+  left: 9%;
+}
+
+#champ_menu{
+	position: relative;
+}
+
+.champ_imgs:hover{
+	cursor: pointer;
+}
+
+.col-xs-3 {
+	height: 150px;
+	background: orange;
+	color: transparent;
+	text-align: center;
+	border: 2px solid black;
+}
+
+.col-xs-8 {
+	height:120px;
+	color: white;
+	background: transparent;
+	text-align: center;
+	border: 2px solid black;
+}
+
+.col-xs-2 {
+	height: 140px;
+	background: orange;
+	color: black;
+	text-align: center;
+	border: 2px solid black;
+}
+
+.champ {
+	background: #3f3f3f;
+	color: white;
+	text-align: center;
+	border: 2px solid white;
+}
+
+#champ_img {
+	height: 100px;
+	background-color: rgb(255,255,255,.7);
+	text-align: center;
+	border: 2px solid white;
+}
+
+.champ_pic {
+  height: 70px;
+  width: 70px;
+  top: 30px;
+  margin: 0 auto;
+  position: relative;
+}
+
