@@ -5,6 +5,7 @@ body {
 
 h2, h3, h4, p {
 	color: white;
+	text-align: center;
 }
 
 .champ_imgs{
@@ -56,7 +57,6 @@ h2, h3, h4, p {
 	color: white;
 	background: transparent;
 	text-align: center;
-	border: 2px solid black;
 }
 
 .col-xs-2 {
