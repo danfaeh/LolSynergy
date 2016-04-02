@@ -14,14 +14,14 @@ h2, h3, h4, p {
 	margin: 5px;
 }
 
-
-
 #content_info{
 	margin-top: 80px;
 }
 
 #menu_wrapper{
-	z-index: 8888;
+	z-index: 1;
+	text-align: center;
+	left: 20px;
 }
 
 #count_message {
