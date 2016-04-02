@@ -22,6 +22,7 @@ h2, h3, h4, p {
 	z-index: 1;
 	text-align: center;
 	left: 20px;
+	bottom: 80px;
 }
 
 #count_message {
