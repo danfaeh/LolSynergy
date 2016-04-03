@@ -21,6 +21,8 @@ app.set('view engine', 'hbs');
 
 // connect to mongodb
 mongoose.connect('mongodb://localhost/lol-synergy');
+  process.on('exit', function() {mongoose.disconnect();
+});
 
 // require User and Post models
 var User = require('./models/user');

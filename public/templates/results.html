@@ -1,26 +1,19 @@
 <h2 nowrap>You Should Pick:  <a href="/" class="btn btn-primary">Back</a></h2> 
+
+	<h3>{{champs.compChamps}}</h3>
+	<h3>{{champs.camps}}</h3>
+<!-- 		<h3 id="count_message">
+			<ng-pluralize count="champs.compChamps.length"
+		                 when="{'0': 'Select Your 4 Teammates:',
+		                     	'1': '3 more to go.',
+		                     	'2': '2 more to go.',
+		                     	'3': 'Select 1 more or... Lock in Now: ',
+		                     	'4': 'Analyze My Comp'}">
+			</ng-pluralize>
+			<a ng-show="champs.compChamps.length>2" type="button" class="btn btn-primary" ng-href="/results">Analyze</a>
+		</h3>
+
 <hr>
-<p ng-if="home.posts.length === 0">No posts yet.</p>
+<p ng-if="home.posts.length === 0">No posts yet.</p> -->
 
-<div ng-if="home.posts.length > 0">
-	<div ng-repeat="post in home.posts">
-		<p><strong>{{post.title}}</strong> - {{post.content}}</p><br>
-	</div>
-</div>
 
-<div ng-show="main.currentUser()">
-	<br>
-	<h4>Add New Post</h4>
-	<hr>
-
-<form ng-submit="home.createPost()" >
-	<div class="form-group">
-	  <input type="text" ng-model="home.new_post.title" class="form-control" placeholder="Title" value="{{main.currentUser().email}}">
-	</div>
-  <div class="form-group">
-    <textarea type="text" ng-model="home.new_post.content" class="form-control" placeholder="Content"></textarea>
-  </div>
-  <input type="submit" value="Create Post" class="btn btn-block btn-info">
-</form>
-
-</div>

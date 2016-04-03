@@ -47,8 +47,8 @@ function configRoutes($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('results', {
       url: '/results',
       templateUrl: 'templates/results.html',
-      controller: 'ResultsController',
-      controllerAs: 'results'
+      controller: 'HomeController',
+      controllerAs: 'champs'
     })       
     .state('signup', {
       url: '/signup',
@@ -188,17 +188,18 @@ function CompsController (Account, $http) {
   }
 }
 
-ResultsController.$inject = ["Account", "$http"]; // minification protection
-function ResultsController (Account, $http) {
+ResultsController.$inject = ["compChamps"]; // minification protection
+function ResultsController (compChamps) {
+  console.log("in results controller");
+  console.log('compChamps', compChamps);
   var vm = this;
-  vm.posts = [];
-  vm.new_post = {}; // form data
-  vm.createPost = createPosts; 
+  vm.compChamps = compChamps;
 
-  $http.get('/api/posts')
-    .then(function (response) {
-      vm.posts = response.data;
-    });
+
+  // $http.get('/api/posts')
+  //   .then(function (response) {
+  //     vm.posts = response.data;
+  //   });
 
   function createPosts(){
     $http.post('/api/posts', vm.new_post)
@@ -275,6 +276,11 @@ function ChampionController (Account, $location) {
 //////////////
 // Services //
 //////////////
+function compChamps(compChamps) {
+  var self = this;
+  self.compChamps = compChamps;
+}
+
 
 Account.$inject = ["$http", "$q", "$auth"]; // minification protection
 function Account($http, $q, $auth) {
