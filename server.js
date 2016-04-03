@@ -26,7 +26,7 @@ mongoose.connect('mongodb://localhost/lol-synergy');
 
 // require User and Post models
 var User = require('./models/user');
-var Post = require('./models/post');
+var Champion = require('./models/champion');
 
 /*
  * API Routes
@@ -52,9 +52,9 @@ app.put('/api/me', auth.ensureAuthenticated, function (req, res) {
   });
 });
 
-app.get('/api/posts', function (req, res) {
-  Post.find({}, function(err, posts) {
-    err ? console.log('error', err) : res.send(posts);
+app.get('/api/champs', function (req, res) {
+  Champion.find({}, function(err, champs) {
+    err ? console.log('error', err) : res.send(champs);
   });
 });
 

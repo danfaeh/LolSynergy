@@ -128,6 +128,7 @@ function HomeController ($http) {
   vm.compChamps = [];
   getChamps();
 
+  // Adds a champ to your comp
   vm.addChamp = function(champ){
     vm.compChamps.push(champ);
     var index = vm.champs.indexOf(champ);
@@ -135,33 +136,29 @@ function HomeController ($http) {
     vm.searchChamp = "";
   };
 
+  // Resets homepage champ selections
   vm.resetChamps = function(){
     vm.compChamps = [];
     vm.champs = [];
     getChamps();
   };
 
+  // Get all champs from database
   function getChamps(){
-    var champName = 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?dataById=81&champData=all&api_key=5b0779a8-6a96-4ca0-ad88-95deb2561b41&alt=json-in-script&callback=JSON_CALLBACK';
-    var champImg= 'http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/';
-      
-    // var apiToken = $http.defaults.headers.common["X-API-TOKEN"];
-    // delete $http.defaults.headers.common["X-API-TOKEN"];
-    // $http.defaults.headers.common.Authorization = 'Basic YmVlcDpib29w';
+    $http.get('/api/champs')
+      .then(function(response) {
+        var champs = response.data;
+        var length = response.data.length;
+        var champImg= 'http://www.mobafire.com/images/champion/icon/';
 
-    $http.get(champName)
-      .then(function(summonerObj) {
-        console.log(summonerObj);
-        window.x = summonerObj.data.data;
-        var x = summonerObj.data.data;
-        for (var key in x ) {
-          var img = x[key].image.full;
-          var imgUrl = champImg + img;
-
-          if (imgUrl === "http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/AurelionSol.png") {
-            imgUrl = 'http://www.mobafire.com/images/champion/icon/aurelion-sol.png';
-          }
-          vm.champs.push({"name": key, "img": imgUrl});
+        // loop through all champs & grab image URLs
+        for (var i=0;i<length;i++) {
+          var imgUrl = champImg + champs[i].name + ".png";
+          imgUrl = imgUrl.replace(/\s+/g, '-').toLowerCase();
+            // if (imgUrl === "http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/AurelionSol.png") {
+            //   imgUrl = 'http://www.mobafire.com/images/champion/icon/aurelion-sol.png';
+            // }
+          vm.champs.push({"name": champs[i].name, "img": imgUrl});
         }
       });
   }
