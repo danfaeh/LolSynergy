@@ -5,6 +5,7 @@ var Champion = require("../models/Champion");
 
 var Test = "a test";
 var Test2 = "a test 2";
+var Test3 = "a test 3";
 //clears all database entries.
 Champion.remove({}, function(err) {
   if (err) {
