@@ -50,29 +50,11 @@ h2, h3, h4, p {
 	cursor: pointer;
 }
 
-.col-xs-3 {
-	height: 150px;
-	background: orange;
-	color: transparent;
-	text-align: center;
-	border: 2px solid black;
-}
-
-.col-xs-8 {
-	height:120px;
-	color: white;
-	background: transparent;
-	text-align: center;
-}
-
 .col-xs-2 {
 	height: 140px;
-	background: orange;
-	color: black;
-	text-align: center;
-	border: 2px solid black;
 }
 
+/*team comp container*/
 .champ {
 	background: #3f3f3f;
 	color: white;
@@ -80,13 +62,7 @@ h2, h3, h4, p {
 	border: 2px solid white;
 }
 
-#champ_img {
-	height: 100px;
-	background-color: rgb(255,255,255,.7);
-	text-align: center;
-	border: 2px solid white;
-}
-
+/*team comp container images*/
 .champ_pic {
   height: 70px;
   width: 70px;
@@ -95,3 +71,32 @@ h2, h3, h4, p {
   position: relative;
 }
 
+#p1 img, #p6 img {
+	top: 0px;
+}
+
+#blueToggle{
+	float: left;
+}
+
+#purpleToggle {
+	float: right;
+}
+
+/*MORPH*/
+.morph {
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+ 
+.morph:hover {
+  border-radius: 50%;
+  -webkit-transform: rotate(360deg);
+     -moz-transform: rotate(360deg);
+       -o-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+          transform: rotate(360deg);
+}

@@ -126,6 +126,7 @@ function HomeController ($http) {
   var vm = this;
   vm.champs = [];
   vm.compChamps = [];
+  // $('#myModal').modal('show');
   getChamps();
 
   // Adds a champ to your comp
@@ -133,7 +134,7 @@ function HomeController ($http) {
     vm.compChamps.push(champ);
     var index = vm.champs.indexOf(champ);
     vm.champs.splice(index,1);
-    vm.searchChamp = "";
+    // $('#search').val(null);
   };
 
   // Resets homepage champ selections
