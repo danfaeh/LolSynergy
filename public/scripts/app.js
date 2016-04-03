@@ -149,12 +149,13 @@ function HomeController ($http) {
       .then(function(response) {
         var champs = response.data;
         var length = response.data.length;
+        // var champImg= 'http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/';
         var champImg= 'http://www.mobafire.com/images/champion/icon/';
 
         // loop through all champs & grab image URLs
         for (var i=0;i<length;i++) {
           var imgUrl = champImg + champs[i].name + ".png";
-          imgUrl = imgUrl.replace(/\s+/g, '-').toLowerCase();
+          imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
             // if (imgUrl === "http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/AurelionSol.png") {
             //   imgUrl = 'http://www.mobafire.com/images/champion/icon/aurelion-sol.png';
             // }
