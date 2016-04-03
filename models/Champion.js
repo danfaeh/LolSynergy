@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var ChampionSchema = new Schema({
+var championSchema = new Schema({
   name: { type: String },
   position: { type: String },
   damage: { type: String },
