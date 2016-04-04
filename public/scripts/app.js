@@ -125,22 +125,42 @@ HomeController.$inject = ["$http"]; // minification protection
 function HomeController ($http) {
   var vm = this;
   vm.champs = [];
-  vm.compChamps = [];
+  vm.blue= [];
+  vm.purple= [];
+  vm.count = 0;
   // $('#myModal').modal('show');
   getChamps();
 
-  // Adds a champ to your comp
+// Adds a champ to your comp
   vm.addChamp = function(champ){
-    vm.compChamps.push(champ);
     var index = vm.champs.indexOf(champ);
     vm.champs.splice(index,1);
+
+    if(vm.blue.length === 0 && vm.purple.length === 0){
+      vm.blue.push(champ);
+      vm.count ++;
+    } else if (vm.blue.length === 1 && vm.purple.length === 0 || vm.purple.length ===1){
+      vm.purple.push(champ);
+      vm.count ++;
+    } else if (vm.blue.length === 3 && vm.purple.length === 2 || vm.purple.length ===3){
+      vm.purple.push(champ);
+      vm.count ++;
+    } else if (vm.blue.length === 5 && vm.purple.length === 4){
+      vm.purple.push(champ);
+      vm.count ++;
+    }else {
+      vm.blue.push(champ);
+      vm.count ++;
+    }
     // $('#search').val(null);
   };
 
   // Resets homepage champ selections
   vm.resetChamps = function(){
-    vm.compChamps = [];
+    vm.blue= [];
+    vm.purple= [];
     vm.champs = [];
+    vm.count = 0;
     getChamps();
   };
 

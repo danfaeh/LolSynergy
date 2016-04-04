@@ -62,8 +62,16 @@ h2, h3, h4, p {
 	border: 2px solid white;
 }
 
+.picking {
+	background: #FFA500;
+	color: white;
+	text-align: center;
+	border: 2px solid white;
+}
+
 /*team comp container images*/
 .champ_pic {
+	background: #3f3f3f;
   height: 70px;
   width: 70px;
   top: 30px;

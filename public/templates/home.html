@@ -5,14 +5,14 @@
 				<button id="blueToggle" type="button" class="btn btn-default" aria-label="Left Align">
 				  <span class="glyphicon glyphicon-circle-arrow-left"></span>
 				</button>
-			<ng-pluralize count="champs.compChamps.length"
+			<ng-pluralize count=champs.blue.length + champs.purple.length
 		                 when="{'0': 'Select Your 4 Teammates:',
 		                     	'1': '3 more to go.',
 		                     	'2': '2 more to go.',
 		                     	'3': 'Select 1 more or... Lock in Now: ',
 		                     	'4': 'Analyze My Comp'}">
 			</ng-pluralize>
-			<a ng-show="champs.compChamps.length>2" type="button" class="btn btn-primary" ng-href="/results">Analyze</a>
+			<a ng-show="champs.blue.length>2" type="button" class="btn btn-primary" ng-href="/results">Analyze</a>
 				<button id="purpleToggle" type="button" class="btn btn-default" aria-label="Right Align">
 				  <span class="glyphicon glyphicon-circle-arrow-right"></span>
 				</button>
@@ -35,29 +35,29 @@
 	<div id="frame" class="container">
 		
 		<div class="row">
-			<div id="p1" class="champ col-xs-2"><h4>blue team</h4><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[0].img?champs.compChamps[0].img:' '}}"></div>
+			<div id="p1" ng-class="{'picking': champs.count===0}" class="champ col-xs-2"><h4>blue team</h4><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></div>
 			<div id="title" class="col-xs-8"></div>
-			<div id="p6" class="champ col-xs-2"><h4>purple team</h4><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[5].img?champs.compChamps[5].img:' '}}"></div>
+			<div id="p6" ng-class="{'picking': champs.count===1}" class="champ col-xs-2"><h4>purple team</h4><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></div>
 		</div>
 
 		<div class="row">
-			<div id="p2" class="champ col-xs-2"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[1].img?champs.compChamps[1].img:' '}}"></div>
-			<div id="p7" class="champ col-xs-2 col-xs-offset-8"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[6].img?champs.compChamps[6].img:' '}}"></div>
+			<div id="p2" ng-class="{'picking': champs.count===3}" class="champ col-xs-2"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></div>
+			<div id="p7" ng-class="{'picking': champs.count===2}" class="champ col-xs-2 col-xs-offset-8"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></div>
 		</div>
 
 		<div class="row">
-			<div id="p3" class="champ col-xs-2"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[2].img?champs.compChamps[2].img:' '}}"></div>
-			<div id="p8" class="champ col-xs-2 col-xs-offset-8"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[7].img?champs.compChamps[7].img:' '}}"></div>
+			<div id="p3" ng-class="{'picking': champs.count===4}" class="champ col-xs-2"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></div>
+			<div id="p8" ng-class="{'picking': champs.count===5}" class="champ col-xs-2 col-xs-offset-8"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[2].img?champs.purple[2].img:' '}}"></div>
 		</div>
 
 		<div class="row">
-			<div id="p4" class="champ col-xs-2"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[3].img?champs.compChamps[3].img:' '}}"></div>
-			<div id="p9" class="champ col-xs-2 col-xs-offset-8"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[8].img?champs.compChamps[8].img:' '}}"></div>
+			<div id="p4" ng-class="{'picking': champs.count===7}" class="champ col-xs-2"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[3].img?champs.blue[3].img:' '}}"></div>
+			<div id="p9" ng-class="{'picking': champs.count===6}" class="champ col-xs-2 col-xs-offset-8"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[3].img?champs.purple[3].img:' '}}"></div>
 		</div>
 
 		<div class="row">
-			<div id="p5" class="champ col-xs-2"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[4].img?champs.compChamps[4].img:' '}}"></div>
-			<div id="p10" class="champ col-xs-2 col-xs-offset-8"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.compChamps[9].img?champs.compChamps[9].img:' '}}"></div>
+			<div id="p5" ng-class="{'picking': champs.count===8}" class="champ col-xs-2"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[4].img?champs.blue[4].img:' '}}"></div>
+			<div id="p10" ng-class="{'picking': champs.count===9}" class="champ col-xs-2 col-xs-offset-8"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[4].img?champs.purple[4].img:' '}}"></div>
 		</div>
 
 	</div>
