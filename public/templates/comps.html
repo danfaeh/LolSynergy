@@ -1,6 +1,41 @@
-<h2>Add Your Comps Here:</h2>
+<h2>Create Your Comp Here:</h2>
 <hr>
-<p ng-if="home.posts.length === 0">No posts yet.</p>
+
+<div class="container" id="compContainer">
+		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></div>
+
+		<h3 id="count_message">
+			<ng-pluralize count="champs.count"
+		                 when="{'0': 'Select Your Comp:',
+		                     	'1': '4 more to go.',
+		                     	'2': '3 more to go.',
+		                     	'3': '2 more to go.',
+		                     	'4': '1 more to go.',
+		                     	'5': 'Save Comp?'}">
+			</ng-pluralize>
+			<a ng-show="champs.blue.length>2" type="button" class="btn btn-primary" ng-href="/results">Save</a>
+				<button id="purpleToggle" type="button" class="btn btn-default" aria-label="Right Align">
+				  <span class="glyphicon glyphicon-circle-arrow-right"></span>
+				</button>
+		</h3>
+</div>
+
+<div class="row">
+		<div id="champ_menu">
+	    <input id="search" ng-model="searchChamp" placeholder="Search a Champion!" autofocus />
+	    <button class="btn btn-info" ng-click="champs.resetChamps()">Reset</button>
+			<div ng-repeat="champ in champs.champs | orderBy: 'name' | filter: searchChamp" >
+				<img class="champ_imgs morph" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+			</div>
+		</div>
+</div>
+
+
+<!-- <p ng-if="home.posts.length === 0">No posts yet.</p>
 
 <div ng-if="home.posts.length > 0">
 	<div ng-repeat="post in home.posts">
@@ -23,4 +58,4 @@
   <input type="submit" value="Create Post" class="btn btn-block btn-info">
 </form>
 
-</div>
+</div> -->

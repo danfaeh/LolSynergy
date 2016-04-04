@@ -41,8 +41,8 @@ function configRoutes($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('comps', {
       url: '/comps',
       templateUrl: 'templates/comps.html',
-      controller: 'CompsController',
-      controllerAs: 'comps'
+      controller: 'HomeController',
+      controllerAs: 'champs'
     })
     .state('results', {
       url: '/results',
@@ -170,16 +170,12 @@ function HomeController ($http) {
       .then(function(response) {
         var champs = response.data;
         var length = response.data.length;
-        // var champImg= 'http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/';
         var champImg= 'http://www.mobafire.com/images/champion/icon/';
 
         // loop through all champs & grab image URLs
         for (var i=0;i<length;i++) {
           var imgUrl = champImg + champs[i].name + ".png";
           imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
-            // if (imgUrl === "http://ddragon.leagueoflegends.com/cdn/6.5.1/img/champion/AurelionSol.png") {
-            //   imgUrl = 'http://www.mobafire.com/images/champion/icon/aurelion-sol.png';
-            // }
           vm.champs.push({"name": champs[i].name, "img": imgUrl});
         }
       });
@@ -189,16 +185,29 @@ function HomeController ($http) {
 CompsController.$inject = ["Account", "$http"]; // minification protection
 function CompsController (Account, $http) {
   var vm = this;
-  vm.posts = [];
-  vm.new_post = {}; // form data
-  vm.createPost = createPosts; 
+  vm.comps = {};
+  vm.new_comp = {}; // form data
+  vm.createPost = createComp; 
+  getChamps();
 
-  $http.get('/api/posts')
-    .then(function (response) {
-      vm.posts = response.data;
-    });
+  // Get all champs from database
+  function getChamps(){
+    $http.get('/api/champs')
+      .then(function(response) {
+        var champs = response.data;
+        var length = response.data.length;
+        var champImg= 'http://www.mobafire.com/images/champion/icon/';
 
-  function createPosts(){
+        // loop through all champs & grab image URLs
+        for (var i=0;i<length;i++) {
+          var imgUrl = champImg + champs[i].name + ".png";
+          imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
+          vm.champs.push({"name": champs[i].name, "img": imgUrl});
+        }
+      });
+  }
+
+  function createComp(){
     $http.post('/api/posts', vm.new_post)
       .then(function(response){
         vm.posts.push(vm.new_post);

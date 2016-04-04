@@ -79,6 +79,11 @@ h2, h3, h4, p {
   position: relative;
 }
 
+#compContainer .col-xs-1 {
+	height: 130px;
+	width: 11.333333%;
+}
+
 #p1 img, #p6 img {
 	top: 0px;
 }
