@@ -5,7 +5,7 @@ angular
   ])
   .controller('MainController', MainController)
   .controller('HomeController', HomeController)
-  .controller('CompsController', CompsController)
+  // .controller('CompsController', CompsController)
   .controller('ResultsController', ResultsController)
   .controller('LoginController', LoginController)
   .controller('SignupController', SignupController)
@@ -128,16 +128,19 @@ function HomeController ($http) {
   vm.blue= [];
   vm.purple= [];
   vm.count = 0;
+  vm.comps = {};
+  vm.new_comp = {};
+  vm.blueStart = true;
   // $('#myModal').modal('show');
   getChamps();
 
-// Adds a champ to your comp
+// Adds Champ to Comp
   vm.addChamp = function(champ){
     var index = vm.champs.indexOf(champ);
     vm.champs.splice(index,1);
 
     if(vm.blue.length === 0 && vm.purple.length === 0){
-      vm.blue.push(champ);
+      vm.blueStart ? vm.blue.push(champ) : vm.purple.push(champ);
       vm.count ++;
     } else if (vm.blue.length === 1 && vm.purple.length === 0 || vm.purple.length ===1){
       vm.purple.push(champ);
@@ -152,7 +155,6 @@ function HomeController ($http) {
       vm.blue.push(champ);
       vm.count ++;
     }
-    // $('#search').val(null);
   };
 
   // Resets homepage champ selections
@@ -164,57 +166,66 @@ function HomeController ($http) {
     getChamps();
   };
 
-  // Get all champs from database
-  function getChamps(){
-    $http.get('/api/champs')
-      .then(function(response) {
-        var champs = response.data;
-        var length = response.data.length;
-        var champImg= 'http://www.mobafire.com/images/champion/icon/';
-
-        // loop through all champs & grab image URLs
-        for (var i=0;i<length;i++) {
-          var imgUrl = champImg + champs[i].name + ".png";
-          imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
-          vm.champs.push({"name": champs[i].name, "img": imgUrl});
-        }
-      });
-  }
-}
-
-CompsController.$inject = ["Account", "$http"]; // minification protection
-function CompsController (Account, $http) {
-  var vm = this;
-  vm.comps = {};
-  vm.new_comp = {}; // form data
-  vm.createPost = createComp; 
-  getChamps();
-
-  // Get all champs from database
-  function getChamps(){
-    $http.get('/api/champs')
-      .then(function(response) {
-        var champs = response.data;
-        var length = response.data.length;
-        var champImg= 'http://www.mobafire.com/images/champion/icon/';
-
-        // loop through all champs & grab image URLs
-        for (var i=0;i<length;i++) {
-          var imgUrl = champImg + champs[i].name + ".png";
-          imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
-          vm.champs.push({"name": champs[i].name, "img": imgUrl});
-        }
-      });
-  }
-
-  function createComp(){
-    $http.post('/api/posts', vm.new_post)
+  vm.createComp = function(c1,c2,c3,c4,c5){
+    console.log('inside create');
+    $http.post('/api/comps', vm.new_post)
       .then(function(response){
-        vm.posts.push(vm.new_post);
+        vm.comps.push(vm.new_comp);
         vm.new_post = '';
     });
+  };
+
+  // Get all champs from database
+  function getChamps(){
+    $http.get('/api/champs')
+      .then(function(response) {
+        var champs = response.data;
+        var length = response.data.length;
+        var champImg= 'http://www.mobafire.com/images/champion/icon/';
+
+        // loop through all champs & grab image URLs
+        for (var i=0;i<length;i++) {
+          var imgUrl = champImg + champs[i].name + ".png";
+          imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
+          vm.champs.push({"name": champs[i].name, "img": imgUrl});
+        }
+      });
   }
 }
+
+// CompsController.$inject = ["Account", "$http"]; // minification protection
+// function CompsController (Account, $http) {
+//   var vm = this;
+//   vm.comps = {};
+//   vm.new_comp = {}; // form data
+//   vm.createPost = createComp; 
+//   getChamps();
+
+//   // Get all champs from database
+//   function getChamps(){
+//     $http.get('/api/champs')
+//       .then(function(response) {
+//         var champs = response.data;
+//         var length = response.data.length;
+//         var champImg= 'http://www.mobafire.com/images/champion/icon/';
+
+//         // loop through all champs & grab image URLs
+//         for (var i=0;i<length;i++) {
+//           var imgUrl = champImg + champs[i].name + ".png";
+//           imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
+//           vm.champs.push({"name": champs[i].name, "img": imgUrl});
+//         }
+//       });
+//   }
+
+//   function createComp(){
+//     $http.post('/api/posts', vm.new_post)
+//       .then(function(response){
+//         vm.posts.push(vm.new_post);
+//         vm.new_post = '';
+//     });
+//   }
+// }
 
 ResultsController.$inject = ["compChamps"]; // minification protection
 function ResultsController (compChamps) {

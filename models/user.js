@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     bcrypt = require('bcryptjs'),
-    Post = require('./post');
+    Comp = require('./comp');
 
 var userSchema = new Schema({
   created: { type: Date },
@@ -11,7 +11,7 @@ var userSchema = new Schema({
   displayName: String,
   username: String,
   picture: String,
-  posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+  comps: [{ type: Schema.Types.ObjectId, ref: 'Comp' }]
 });
 
 userSchema.pre('save', function (next) {

@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/">
 
+  <!-- Bower Components 
+  <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>-->
+
   <!-- bootstrap css -->
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
@@ -26,7 +34,7 @@
   <!-- ui router -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 
-  <!-- TODO #1: ADD satellizer CDN -->
+  <!-- Satellizer CDN -->
   <script src="//cdn.jsdelivr.net/satellizer/0.14.0/satellizer.min.js"></script>
   <!-- custom script (angular app) -->
   <script type="text/javascript" src="scripts/app.js"></script>
@@ -60,12 +68,8 @@
     </div>
   </nav>
 
-  <div id="page_content" class="container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <ui-view>
-      </div>
-    </div>
+  <div id="page_content" class="container-fluid">
+    <ui-view>
   </div>
 
 {{!-- <iframe class="hidden" width="420" height="315" src="https://www.youtube.com/embed/QzyacJhM5Cs?autoplay=1" frameborder="0"></iframe> --}}

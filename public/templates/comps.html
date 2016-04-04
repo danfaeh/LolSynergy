@@ -1,12 +1,27 @@
-<h2>Create Your Comp Here:</h2>
+<div class="col-sm-4">
+	<div class="row">
+		<div id="comp_list">
+			<div ng-repeat="comp in champs.comps" >
+				<img ng-src="{{comp.champ1}}">
+				<img ng-src="{{comp.champ2}}">
+				<img ng-src="{{comp.champ3}}">
+				<img ng-src="{{comp.champ4}}">
+				<img ng-src="{{comp.champ5}}">
+			</div>
+		</div>
+</div>
+</div>
+
+<div class="container col-sm-8">
+<h2>Create A New Comp:</h2>
 <hr>
 
 <div class="container" id="compContainer">
-		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></div>
-		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></div>
-		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></div>
-		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></div>
-		<div class="champ col-xs-1"><img class="champ_pic" ng-click="removeChamp(champ)" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ1" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ2" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ3" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ4" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ5" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></div>
 
 		<h3 id="count_message">
 			<ng-pluralize count="champs.count"
@@ -17,10 +32,8 @@
 		                     	'4': '1 more to go.',
 		                     	'5': 'Save Comp?'}">
 			</ng-pluralize>
-			<a ng-show="champs.blue.length>2" type="button" class="btn btn-primary" ng-href="/results">Save</a>
-				<button id="purpleToggle" type="button" class="btn btn-default" aria-label="Right Align">
-				  <span class="glyphicon glyphicon-circle-arrow-right"></span>
-				</button>
+			<br>
+			<a ng-show="champs.blue.length>2" type="button" class="btn btn-primary" ng-click="champs.createComp()">Save</a>
 		</h3>
 </div>
 

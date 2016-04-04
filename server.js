@@ -25,6 +25,7 @@ mongoose.connect('mongodb://localhost/lol-synergy');
 });
 
 // require User and Post models
+var Comp = require('./models/comp');
 var User = require('./models/user');
 var Champion = require('./models/champion');
 
@@ -34,7 +35,7 @@ var Champion = require('./models/champion');
 
 app.get('/api/me', auth.ensureAuthenticated, function (req, res) {
   User.findById(req.user, function (err, user) {
-    res.send(user.populate('posts'));
+    res.send(user.populate('comps'));
   });
 });
 
@@ -58,13 +59,17 @@ app.get('/api/champs', function (req, res) {
   });
 });
 
-app.post('/api/posts', function(req,res){
-  console.log('post req', req.body);
-  var post = new Post({
-    title: req.body.title,
-    content: req.body.content
+app.post('/api/comps', function(req,res){
+  console.log('comp req', req.body);
+  var comp = new Comp({
+  champ1: req.body.champ1,
+  champ2: req.body.champ2,
+  champ3: req.body.champ3,
+  champ4: req.body.champ4,
+  champ5: req.body.champ5,
+  description: req.body.description
   });
-  post.save(function(err,result){
+  comp.save(function(err,result){
     if (err) {
         res.status(500).send({ message: err.message });
       }
