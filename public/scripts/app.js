@@ -1,10 +1,8 @@
-// import { addChamp } from '../../service.js';
-// var addChamp = require('../../services');
-
 angular
   .module('LolSynergy', [
     'ui.router',
     'satellizer'
+    // 'LolSynergy.services'
   ])
   .controller('MainController', MainController)
   .controller('HomeController', HomeController)
@@ -13,8 +11,8 @@ angular
   .controller('SignupController', SignupController)
   .controller('LogoutController', LogoutController)
   .controller('ProfileController', ProfileController)
+  // .service("Service1", Service1)
   .service('Account', Account)
-  // .service('addChamp', addChamp)
   // .factory('Algorithm', Algorithm)
   .config(configRoutes)
   ;
@@ -140,7 +138,7 @@ function HomeController ($http) {
   vm.purpleCount = 0;
   vm.lock=0;
   vm.showResults = false;
-  getChamps(); 
+  getChamps();
 
 /////////////////ALGORITHM////////////////////
   vm.results = function(){
@@ -179,40 +177,46 @@ function HomeController ($http) {
   };
 /////////////////ALGORITHM////////////////////  
 
-
+/////////////////Add Champ from Service///////////////////
+// vm.champClick = function(champ){
+//   vm.champClicked = champ;
+//   vm.blue = Service1.addChamp(vm.champClicked); 
+//   var index = vm.champs.indexOf(champ);
+//   vm.champs.splice(index,1);
+// };
+/////////////////Add Champ from Service///////////////////
 
 // Adds Champ to Comp
   vm.addChamp = function(champ){
+    if (vm.lock===0){
+      if (vm.blue.length === 5 || vm.purple.length === 5){
+        vm.lock = 1;
+      }else if(vm.blue.length === 0 && vm.purple.length === 0){
+        vm.blueStart ? vm.blue.push(champ) : vm.purple.push(champ);
+        vm.count ++;
+      } else if (vm.blue.length > vm.purple.length){
+        vm.purple.push(champ);
+        vm.count ++;
+        vm.blueCount = 0;
+        vm.purpleCount = 1;
+      } else if (vm.purple.length > vm.blue.length){
+        vm.blue.push(champ);
+        vm.count ++;
+        vm.blueCount = 1;
+        vm.purpleCount = 0;
+      } else if (vm.blueCount === 1){
+        vm.blue.push(champ);
+        vm.count ++;
+        vm.blueCount = 0;
+      } else if(vm.purpleCount === 1){
+        vm.purple.push(champ);
+        vm.count ++;
+        vm.purpleCount = 0;
+      }
 
-  if (vm.lock===0){
-    if (vm.blue.length === 5 || vm.purple.length === 5){
-      vm.lock = 1;
-    }else if(vm.blue.length === 0 && vm.purple.length === 0){
-      vm.blueStart ? vm.blue.push(champ) : vm.purple.push(champ);
-      vm.count ++;
-    } else if (vm.blue.length > vm.purple.length){
-      vm.purple.push(champ);
-      vm.count ++;
-      vm.blueCount = 0;
-      vm.purpleCount = 1;
-    } else if (vm.purple.length > vm.blue.length){
-      vm.blue.push(champ);
-      vm.count ++;
-      vm.blueCount = 1;
-      vm.purpleCount = 0;
-    } else if (vm.blueCount === 1){
-      vm.blue.push(champ);
-      vm.count ++;
-      vm.blueCount = 0;
-    } else if(vm.purpleCount === 1){
-      vm.purple.push(champ);
-      vm.count ++;
-      vm.purpleCount = 0;
+      var index = vm.champs.indexOf(champ);
+      vm.champs.splice(index,1);
     }
-
-    var index = vm.champs.indexOf(champ);
-    vm.champs.splice(index,1);
-  }
   };
 
   // Resets homepage champ selections
@@ -468,34 +472,5 @@ function Account($http, $q, $auth) {
     );
   }
 }
-// addChamp.$inject = ["champ"]; // minification protection
-// function addChamp(champ){
-//    var index = vm.champs.indexOf(champ);
-//     vm.champs.splice(index,1);
 
-//     if (vm.blue.length === 5 && vm.purple.length === 5){
-//       vm.lock = 1;
-//     }else if(vm.blue.length === 0 && vm.purple.length === 0){
-//       vm.blueStart ? vm.blue.push(champ) : vm.purple.push(champ);
-//       vm.count ++;
-//     } else if (vm.blue.length > vm.purple.length){
-//       vm.purple.push(champ);
-//       vm.count ++;
-//       vm.blueCount = 0;
-//       vm.purpleCount = 1;
-//     } else if (vm.purple.length > vm.blue.length){
-//       vm.blue.push(champ);
-//       vm.count ++;
-//       vm.blueCount = 1;
-//       vm.purpleCount = 0;
-//     } else if (vm.blueCount === 1){
-//       vm.blue.push(champ);
-//       vm.count ++;
-//       vm.blueCount = 0;
-//     } else if(vm.purpleCount === 1){
-//       vm.purple.push(champ);
-//       vm.count ++;
-//       vm.purpleCount = 0;
-//     }
-// }
 
