@@ -166,11 +166,14 @@ function HomeController ($http) {
 
       console.log("positions",positions);
       console.log("positions needed",positionsNeeded); 
-      var champCount = vm.champs.length;     
+      var champCount = vm.champs.length;
+      var positionsNeededCount = positionsNeeded.length; 
       for (var j=0;j<champCount;j++){
-        if (vm.champs[j].position === positionsNeeded[0]){
-          vm.bestChamps.push(vm.champs[j]);
-        }
+        for (var z=0;z<positionsNeededCount;z++){
+          if (vm.champs[j].position === positionsNeeded[z]){
+            vm.bestChamps.push(vm.champs[j]);
+          }
+        }  
       }
 
   };
