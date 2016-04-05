@@ -32,6 +32,13 @@ h2, h3, h4, p {
 	left: 20px;
 }
 
+#results_wrapper{
+	z-index: 1;
+	text-align: center;
+	left: 20px;
+}
+
+
 #count_message {
 	text-align: center;
 }

@@ -129,6 +129,7 @@ HomeController.$inject = ["$http"]; // minification protection
 function HomeController ($http) {
   var vm = this;
   vm.champs = [];
+  vm.bestChamps = [];
   vm.blue= [];
   vm.purple= [];
   vm.count = 0;
@@ -138,16 +139,21 @@ function HomeController ($http) {
   vm.blueCount = 0;
   vm.purpleCount = 0;
   vm.lock=0;
-
-  // $('#myModal').modal('show');
-
+  vm.showResults = false;
   getChamps();
   // vm.addChamp = addChamp;  
 
   vm.results = function(){
-    console.log('inside results');
-    vm.seeResults = true;
+    vm.showResults = true;
+    console.log("first blue team",vm.blue[0].position);
+    length = vm.blue.length;
+    for (i=0;i<length;i++){
+      vm.bestChamps.push(vm.blue[i]);
+    }
 
+
+
+    // vm.bestChamps.push();
   };
 
 // Adds Champ to Comp
@@ -189,6 +195,7 @@ function HomeController ($http) {
     vm.blue= [];
     vm.purple= [];
     vm.champs = [];
+    vm.bestChamps = [];
     vm.count = 0;
     vm.lock = 0;
     getChamps();
@@ -215,7 +222,7 @@ function HomeController ($http) {
         for (var i=0;i<length;i++) {
           var imgUrl = champImg + champs[i].name + ".png";
           imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
-          vm.champs.push({"name": champs[i].name, "img": imgUrl});
+          vm.champs.push({"name": champs[i].name, "img": imgUrl, position: champs[i].position, damage: champs[i].damage,  hardcc: champs[i].hardcc, tank: champs[i].tank, engage: champs[i].engage,   seige:champs[i].seige, waveclear:champs[i].waveclear, aram: champs[i].aram});
         }
       });
   }
