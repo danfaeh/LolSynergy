@@ -30,17 +30,20 @@
 <br><br><br>
 </div>	
 
+
+
 <!-- RESULTS STUFF -->
 <div id="results_wrapper" class="col-xs-6 col-xs-offset-3" ng-show="champs.showResults">
-	<h1>Here's who we recommend:</h1>
-		<div ng-repeat="(key, champ) in champs.bestChamps | orderBy: 'name'" >
-			<h3>{{key+1}}</h3>
-			<p>{{champ.name}}</p>
-			<img class="champ_imgs morph" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
-		</div>
-	<button class="btn btn-primary" ng-click="champs.showResults=false; champs.resetChamps()">Back</button>
+	<h1>Here's who we'd recommend:  <button id="back_btn" class="btn btn-primary" ng-click="champs.showResults=false; champs.resetChamps()">Back</button></h1>
+		
+			<div ng-repeat="(key, champ) in champs.bestChamps | orderBy: 'name'">
+				<h3>{{key+1}} : {{champ.name}}</h3>
+				<img class="best_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+			</div>
 </div>
 <!-- RESULTS STUFF -->
+
+
 
 	<div id="frame" class="container">
 		
@@ -81,9 +84,12 @@
       </div>
       <div class="modal-body">
 
-			<div ng-repeat="champ in champs.blue | orderBy: 'name' | filter: searchChamp" >
-				<img class="champ_imgs morph" ng-src="{{champ.img}}">
-				<p>{{champ.name}}</p>
+			<div>
+				<h1>Here's who we'd recommend:  <button id="back_btn" class="btn btn-primary" ng-click="champs.showResults=false; champs.resetChamps()">Back</button></h1>
+						<div ng-repeat="(key, champ) in champs.bestChamps | orderBy: 'name'">
+							<h3>{{key+1}} : {{champ.name}}</h3>
+							<img class="best_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+						</div>
 			</div>
 
       </div>

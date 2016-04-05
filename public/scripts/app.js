@@ -140,21 +140,43 @@ function HomeController ($http) {
   vm.purpleCount = 0;
   vm.lock=0;
   vm.showResults = false;
-  getChamps();
-  // vm.addChamp = addChamp;  
+  getChamps(); 
 
+/////////////////ALGORITHM////////////////////
   vm.results = function(){
-    vm.showResults = true;
-    console.log("first blue team",vm.blue[0].position);
-    length = vm.blue.length;
-    for (i=0;i<length;i++){
-      vm.bestChamps.push(vm.blue[i]);
-    }
+      vm.showResults = true;
 
+    //position Search
+      var allPositions = ['top','mid','support','jungle','adc'];
+      var positions = [];
+      var positionsNeeded = [];  
 
+      for (var i=0;i<vm.blue.length;i++){
+        var newPosition = vm.blue[i].position;
+        if (positions.indexOf(newPosition)===-1){
+          positions.push(newPosition);
+        } 
+      }
+   
+      for (var k=0;k<5;k++){
+        if (positions.indexOf(allPositions[k])===-1){
+          positionsNeeded.push(allPositions[k]);
+        } 
+      }
 
-    // vm.bestChamps.push();
+      console.log("positions",positions);
+      console.log("positions needed",positionsNeeded); 
+      var champCount = vm.champs.length;     
+      for (var j=0;j<champCount;j++){
+        if (vm.champs[j].position === positionsNeeded[0]){
+          vm.bestChamps.push(vm.champs[j]);
+        }
+      }
+
   };
+/////////////////ALGORITHM////////////////////  
+
+
 
 // Adds Champ to Comp
   vm.addChamp = function(champ){

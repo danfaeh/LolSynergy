@@ -3,7 +3,7 @@ body {
   background-size: cover;
 }
 
-h2, h3, h4, p {
+h1, h2, h3, h4, p {
 	color: white;
 	text-align: center;
 }
@@ -19,6 +19,11 @@ h2, h3, h4, p {
 	width: 60px;
 	float: left;
 	margin: 5px;
+}
+
+.best_imgs{
+	height: 60px;
+	width: 60px;
 }
 
 #page_content{
@@ -101,6 +106,14 @@ h2, h3, h4, p {
 
 #purpleToggle {
 	float: right;
+}
+
+#back_btn {
+	float: right;
+}
+
+.modal-content{
+	background: lightgreen;
 }
 
 /*MORPH*/
