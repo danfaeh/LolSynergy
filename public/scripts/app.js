@@ -120,7 +120,7 @@ HomeController.$inject = ["$http"]; // minification protection
 function HomeController ($http) {
   var vm = this;
   vm.champs = [];
-  vm.bestChamps = [];
+  vm.positionChamps = [];
   vm.blue= [];
   vm.purple= [];
   vm.count = 0;
@@ -131,65 +131,74 @@ function HomeController ($http) {
   vm.purpleCount = 0;
   vm.lock=0;
   vm.showResults = false;
+  vm.showPositions = false;
+  vm.champSelect = true;
   getChamps();
 
 /////////////////ALGORITHM////////////////////
-  vm.results = function(){
-      vm.showResults = true;
+  vm.positionMenu = function(){
+    vm.showPositions = true;
+    vm.champSelect = false;
+  }
 
-    //position Search
+  vm.top = function(){
+    vm.showPositions = false;
+    vm.showResults = true;
+
+  }
+
+  vm.results = function(role){
+    vm.showPositions = false;
+    vm.showResults = true;
+
+    //position Search    
       var allPositions = ['top','mid','support','jungle','adc'];
       var allDamage = [];
       var positions = [];
       var positionsNeeded = [];  
-      var damageNeeded = [];
+      var needAp = false;
 
+      // creates Array of positions covered by Blue Team
       for (var i=0;i<vm.blue.length;i++){
         var newPosition = vm.blue[i].position;
         if (positions.indexOf(newPosition)===-1){
           positions.push(newPosition);
         } 
       }
-   
+      // creates Array of positions NEEDED by Blue Team
       for (i=0;i<5;i++){
         if (positions.indexOf(allPositions[i])===-1){
           positionsNeeded.push(allPositions[i]);
         } 
       }
 
-      console.log("positions",positions);
-      console.log("positions needed",positionsNeeded); 
-      console.log("damage needed", damageNeeded);
+      //Decides if team needs AP Damage or not
+      for (i=0;i<vm.blue.length;i++){
+        allDamage.push(vm.blue[i].damage);   
+      }
+      allDamage.indexOf("ap")===-1 ? needAp = true : needAp = false;
+
 
       var champCount = vm.champs.length;
       var positionsNeededCount = positionsNeeded.length; 
-
+      //goes through all champs and pushes needed positions into Array
       for (i=0;i<champCount;i++){
         for (j=0;j<positionsNeededCount;j++){
           if (vm.champs[i].position === positionsNeeded[j]){
-            vm.bestChamps.push(vm.champs[i]);
+
+            if (needAp === true){
+              if (vm.champs[i].damage === "ap"){ 
+                vm.positionChamps.push(vm.champs[i]);
+              }
+            }else{
+              vm.positionChamps.push(vm.champs[i]);
+            }
+
           }
         }  
       }
 
-      console.log("best Champs", vm.bestChamps);
-  // now remove all "wrong damage types" from bestChamps
-      for (i=0;i<vm.blue.length;i++){
-        allDamage.push(vm.blue[i].damage);   
-      }
-    var needAp = false;
-    allDamage.indexOf("ap")===-1 ? needAp = true : needAp = false;
-  
-
-    if (needAp === true){
-      var bestChampCount = vm.bestChamps.length; 
-        for (i=0;i<bestChampCount;i++){
-          if (vm.bestChamps[i].damage === "ad"){
-            vm.bestChamps.splice(i,1);
-          }
-        }
-    }
-    console.log("best Champs after", vm.bestChamps);
+      console.log("Position Champs", vm.positionChamps);
 };
 /////////////////ALGORITHM////////////////////////////////
 
@@ -238,13 +247,16 @@ function HomeController ($http) {
 
   // Resets homepage champ selections
   vm.resetChamps = function(){
-    vm.blue= [];
-    vm.purple= [];
-    vm.champs = [];
-    vm.bestChamps = [];
-    vm.count = 0;
-    vm.lock = 0;
-    getChamps();
+    // vm.blue= [];
+    // vm.purple= [];
+    // vm.champs = [];
+    // vm.positionChamps = [];
+    // vm.count = 0;
+    // vm.lock = 0;
+    // vm.showResults = false;
+    // vm.showPositions = false;
+    // getChamps();
+    window.location="/";
   };
 
   vm.createComp = function(c1,c2,c3,c4,c5){

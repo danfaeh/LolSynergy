@@ -41,6 +41,14 @@ h1, h2, h3, h4, p {
 	z-index: 1;
 	text-align: center;
 	left: 20px;
+	color: white;
+}
+
+#positions_wrapper{
+	z-index: 1;
+	text-align: center;
+	left: 20px;
+	color: white;
 }
 
 

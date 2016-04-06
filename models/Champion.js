@@ -11,6 +11,7 @@ var championSchema = new Schema({
   seige: { type: Boolean },
   waveclear: { type: Boolean },
  	aram: { type: String }
+ 	
 });
 
 var Champion = mongoose.model('Champion', championSchema);

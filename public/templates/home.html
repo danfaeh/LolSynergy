@@ -1,4 +1,4 @@
-	<div id="menu_wrapper" class="col-xs-6 col-xs-offset-3" ng-hide="champs.showResults">
+	<div id="menu_wrapper" class="col-xs-6 col-xs-offset-3" ng-show="champs.champSelect">
 		<h3 id="count_message">
 				<button id="blueToggle" type="button" class="btn btn-default" aria-label="Left Align" ng-click="champs.blueStart = true">
 				  <span class="glyphicon glyphicon-circle-arrow-left"></span>
@@ -10,7 +10,7 @@
 			</ng-pluralize>
 
 			<button ng-show="champs.blue.length>0 || champs.purple.length>0" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Modal</button>
-			<a ng-show="champs.blue.length>0 || champs.purple.length>0" type="button" class="btn btn-primary btn-lg" ng-click="champs.results()">Flip</a>
+			<a ng-show="champs.blue.length>0 || champs.purple.length>0" type="button" class="btn btn-primary btn-lg" ng-click="champs.positionMenu()">Flip</a>
 
 				<button id="purpleToggle" type="button" class="btn btn-default" aria-label="Right Align" ng-click="champs.blueStart = false">
 				  <span class="glyphicon glyphicon-circle-arrow-right"></span>
@@ -30,15 +30,47 @@
 <br><br><br>
 </div>	
 
-
+<!-- Pick Position -->
+<div id="positions_wrapper" class="col-xs-6 col-xs-offset-3" ng-show="champs.showPositions">
+	<h1>Where Are You Going This Game?</h1>
+	<button class="btn btn-primary" ng-click="champs.results('top')">Top</button>
+	<button class="btn btn-primary" ng-click="champs.results('jungle')">Jungle</button>
+	<button class="btn btn-primary" ng-click="champs.results('mid')">Mid</button>
+	<button class="btn btn-primary" ng-click="champs.results('adc')">ADC</button>
+	<button class="btn btn-primary" ng-click="champs.results('support')">Support</button>
+</div>	
+<!-- Pick Position -->
 
 <!-- RESULTS STUFF -->
 <div id="results_wrapper" class="col-xs-6 col-xs-offset-3" ng-show="champs.showResults">
-	<h1>Here's who we'd recommend:  <button id="back_btn" class="btn btn-primary" ng-click="champs.showResults=false; champs.resetChamps()">Back</button></h1>
-			<div ng-repeat="(key, champ) in champs.bestChamps | orderBy: 'name'">
+	<h1>Here's who we'd recommend:  <button id="back_btn" class="btn btn-primary" ng-click="champs.resetChamps()">Back</button></h1>
+		<div class="col-xs-3"> You Need More CC
+			<div ng-repeat="(key, champ) in champs.positionChamps | orderBy: 'name'">
 				<h3>{{key+1}} : {{champ.name}}</h3>
 				<img class="best_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
 			</div>
+		</div>
+
+		<div class="col-xs-3"> You Need WaveClear
+			<div ng-repeat="(key, champ) in champs.positionChamps | orderBy: 'name'">
+				<h3>{{key+1}} : {{champ.name}}</h3>
+				<img class="best_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+			</div>
+		</div>
+
+		<div class="col-xs-3"> You Need Engage
+			<div ng-repeat="(key, champ) in champs.positionChamps | orderBy: 'name'">
+				<h3>{{key+1}} : {{champ.name}}</h3>
+				<img class="best_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+			</div>
+		</div>	
+
+		<div class="col-xs-3"> You Need a Tank
+			<div ng-repeat="(key, champ) in champs.positionChamps | orderBy: 'name'">
+				<h3>{{key+1}} : {{champ.name}}</h3>
+				<img class="best_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+			</div>
+		</div>			
 </div>
 <!-- RESULTS STUFF -->
 
