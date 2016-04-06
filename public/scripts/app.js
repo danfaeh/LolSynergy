@@ -141,12 +141,6 @@ function HomeController ($http) {
     vm.champSelect = false;
   }
 
-  vm.top = function(){
-    vm.showPositions = false;
-    vm.showResults = true;
-
-  }
-
   vm.results = function(role){
     vm.showPositions = false;
     vm.showResults = true;
