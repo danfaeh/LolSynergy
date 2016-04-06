@@ -35,7 +35,6 @@
 <!-- RESULTS STUFF -->
 <div id="results_wrapper" class="col-xs-6 col-xs-offset-3" ng-show="champs.showResults">
 	<h1>Here's who we'd recommend:  <button id="back_btn" class="btn btn-primary" ng-click="champs.showResults=false; champs.resetChamps()">Back</button></h1>
-		
 			<div ng-repeat="(key, champ) in champs.bestChamps | orderBy: 'name'">
 				<h3>{{key+1}} : {{champ.name}}</h3>
 				<img class="best_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">

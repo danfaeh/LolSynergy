@@ -6,7 +6,6 @@ angular
   ])
   .controller('MainController', MainController)
   .controller('HomeController', HomeController)
-  .controller('ResultsController', ResultsController)
   .controller('LoginController', LoginController)
   .controller('SignupController', SignupController)
   .controller('LogoutController', LogoutController)
@@ -45,13 +44,7 @@ function configRoutes($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: 'templates/comps.html',
       controller: 'HomeController',
       controllerAs: 'champs'
-    })
-    .state('results', {
-      url: '/results',
-      templateUrl: 'templates/results.html',
-      controller: 'HomeController',
-      controllerAs: 'champs'
-    })       
+    })    
     .state('signup', {
       url: '/signup',
       templateUrl: 'templates/signup.html',
@@ -146,8 +139,10 @@ function HomeController ($http) {
 
     //position Search
       var allPositions = ['top','mid','support','jungle','adc'];
+      var allDamage = [];
       var positions = [];
       var positionsNeeded = [];  
+      var damageNeeded = [];
 
       for (var i=0;i<vm.blue.length;i++){
         var newPosition = vm.blue[i].position;
@@ -156,26 +151,48 @@ function HomeController ($http) {
         } 
       }
    
-      for (var k=0;k<5;k++){
-        if (positions.indexOf(allPositions[k])===-1){
-          positionsNeeded.push(allPositions[k]);
+      for (i=0;i<5;i++){
+        if (positions.indexOf(allPositions[i])===-1){
+          positionsNeeded.push(allPositions[i]);
         } 
       }
 
       console.log("positions",positions);
       console.log("positions needed",positionsNeeded); 
+      console.log("damage needed", damageNeeded);
+
       var champCount = vm.champs.length;
       var positionsNeededCount = positionsNeeded.length; 
-      for (var j=0;j<champCount;j++){
-        for (var z=0;z<positionsNeededCount;z++){
-          if (vm.champs[j].position === positionsNeeded[z]){
-            vm.bestChamps.push(vm.champs[j]);
+
+      for (i=0;i<champCount;i++){
+        for (j=0;j<positionsNeededCount;j++){
+          if (vm.champs[i].position === positionsNeeded[j]){
+            vm.bestChamps.push(vm.champs[i]);
           }
         }  
       }
 
-  };
-/////////////////ALGORITHM////////////////////  
+      console.log("best Champs", vm.bestChamps);
+  // now remove all "wrong damage types" from bestChamps
+      for (i=0;i<vm.blue.length;i++){
+        allDamage.push(vm.blue[i].damage);   
+      }
+    var needAp = false;
+    allDamage.indexOf("ap")===-1 ? needAp = true : needAp = false;
+  
+
+    if (needAp === true){
+      var bestChampCount = vm.bestChamps.length; 
+        for (i=0;i<bestChampCount;i++){
+          if (vm.bestChamps[i].damage === "ad"){
+            vm.bestChamps.splice(i,1);
+          }
+        }
+    }
+    console.log("best Champs after", vm.bestChamps);
+};
+/////////////////ALGORITHM////////////////////////////////
+
 
 /////////////////Add Champ from Service///////////////////
 // vm.champClick = function(champ){
@@ -257,64 +274,6 @@ function HomeController ($http) {
   }
 }
 
-
-
-// CompsController.$inject = ["Account", "$http"]; // minification protection
-// function CompsController (Account, $http) {
-//   var vm = this;
-//   vm.comps = {};
-//   vm.new_comp = {}; // form data
-//   vm.createPost = createComp; 
-//   getChamps();
-
-//   // Get all champs from database
-//   function getChamps(){
-//     $http.get('/api/champs')
-//       .then(function(response) {
-//         var champs = response.data;
-//         var length = response.data.length;
-//         var champImg= 'http://www.mobafire.com/images/champion/icon/';
-
-//         // loop through all champs & grab image URLs
-//         for (var i=0;i<length;i++) {
-//           var imgUrl = champImg + champs[i].name + ".png";
-//           imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
-//           vm.champs.push({"name": champs[i].name, "img": imgUrl});
-//         }
-//       });
-//   }
-
-//   function createComp(){
-//     $http.post('/api/posts', vm.new_post)
-//       .then(function(response){
-//         vm.posts.push(vm.new_post);
-//         vm.new_post = '';
-//     });
-//   }
-// }
-
-ResultsController.$inject = ["compChamps"]; // minification protection
-function ResultsController (compChamps) {
-  console.log("in results controller");
-  console.log('compChamps', compChamps);
-  var vm = this;
-  vm.compChamps = compChamps;
-
-
-  // $http.get('/api/posts')
-  //   .then(function (response) {
-  //     vm.posts = response.data;
-  //   });
-
-  function createPosts(){
-    $http.post('/api/posts', vm.new_post)
-      .then(function(response){
-        vm.posts.push(vm.new_post);
-        vm.new_post = '';
-    });
-  }
-}
-
 LoginController.$inject = ["Account", "$location"]; // minification protection
 function LoginController (Account, $location) {
   var vm = this;
@@ -369,12 +328,6 @@ function ProfileController (Account, $location) {
     // TODO #14: Submit the form using the relevant `Account` method
     // On success, clear the form
   };
-}
-
-ChampionController.$inject = ["Account", "$location"];
-function ChampionController (Account, $location) {
-
-  
 }
 
 
