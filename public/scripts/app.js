@@ -141,60 +141,94 @@ function HomeController ($http) {
     vm.champSelect = false;
   }
 
-  vm.results = function(role){
+  vm.results = function(positionNeeded){
     vm.showPositions = false;
     vm.showResults = true;
 
-    //position Search    
-      var allPositions = ['top','mid','support','jungle','adc'];
-      var allDamage = [];
-      var positions = [];
-      var positionsNeeded = [];  
-      var needAp = false;
+    vm.position = positionNeeded;
+    vm.ccChamps = [];
+    vm.seigeChamps = [];
+    vm.waveClearChamps = [];
+    vm.engageChamps = [];
+    vm.tankChamps = [];
+    var allDamage = [];
 
-      // creates Array of positions covered by Blue Team
-      for (var i=0;i<vm.blue.length;i++){
-        var newPosition = vm.blue[i].position;
-        if (positions.indexOf(newPosition)===-1){
-          positions.push(newPosition);
-        } 
-      }
-      // creates Array of positions NEEDED by Blue Team
-      for (i=0;i<5;i++){
-        if (positions.indexOf(allPositions[i])===-1){
-          positionsNeeded.push(allPositions[i]);
-        } 
-      }
+    vm.damageNeeded=null;
+    vm.hasTank = false;
+    vm.hasSeige = false;
+    vm.hasWaveClear = 0;
+    vm.hasCC = 0
+    vm.hasEngage = false;
+
 
       //Decides if team needs AP Damage or not
       for (i=0;i<vm.blue.length;i++){
-        allDamage.push(vm.blue[i].damage);   
+        allDamage.push(vm.blue[i].damage);
+          if (vm.blue[i].tank === true){
+            vm.hasTank = true; //medium
+          }
+          if (vm.blue[i].engage === true){
+            vm.hasEngage = true; //high
+          }  
+          if (vm.blue[i].waveclear === true){
+            //make it so at least 2 wave clear champs per team
+            vm.hasWaveClear ++; //low
+          }  
+          if (vm.blue[i].seige === true){
+            vm.hasSeige = true; //high
+          }
+          if (vm.blue[i].hardcc > 0){
+            vm.hasCC ++; //medium
+          }     
       }
-      allDamage.indexOf("ap")===-1 ? needAp = true : needAp = false;
 
+      var needAP = false;
+      var needAD = false;
+      allDamage.indexOf("ap")===-1 ? needAP = true : needAP = false;
+      allDamage.indexOf("ad")===-1 ? needAD = true : needAD = false;
 
+      //goes through all champs. Collects them in an array if they fit the desired position. 
+      //also considers if team needs a certain damage type, and only shows that type.
       var champCount = vm.champs.length;
-      var positionsNeededCount = positionsNeeded.length; 
-      //goes through all champs and pushes needed positions into Array
       for (i=0;i<champCount;i++){
-        for (j=0;j<positionsNeededCount;j++){
-          if (vm.champs[i].position === positionsNeeded[j]){
-
-            if (needAp === true){
-              if (vm.champs[i].damage === "ap"){ 
-                vm.positionChamps.push(vm.champs[i]);
-              }
-            }else{
+        if (vm.champs[i].position === positionNeeded){
+          if (needAP === true){
+            vm.damageNeeded = "ap"
+            if (vm.champs[i].damage === "ap"){ 
               vm.positionChamps.push(vm.champs[i]);
             }
-
+          }else if (needAD === true){
+            vm.damageNeeded = "ad"
+            if (vm.champs[i].damage === "ad"){ 
+              vm.positionChamps.push(vm.champs[i]);
+            }
+          }else{
+            vm.positionChamps.push(vm.champs[i]);
           }
-        }  
+        }    
       }
 
-      console.log("Position Champs", vm.positionChamps);
+      var positionChampCount = vm.positionChamps.length;
+      for (i=0;i<positionChampCount;i++){   
+        if (vm.positionChamps[i].seige === true){
+          vm.seigeChamps.push(vm.positionChamps[i])
+        }
+        if (vm.positionChamps[i].waveclear === true){
+          vm.waveClearChamps.push(vm.positionChamps[i])
+        }
+        if (vm.positionChamps[i].engage === true){
+          vm.engageChamps.push(vm.positionChamps[i])
+        }
+        if (vm.positionChamps[i].tank === true){
+          vm.tankChamps.push(vm.positionChamps[i])
+        }
+        if ((vm.positionChamps[i].hardcc > 0 && vm.positionChamps[i].hardcc > 0) || vm.positionChamps[i].hardcc > 1){
+          vm.ccChamps.push(vm.positionChamps[i])
+        }
+      }
+
 };
-/////////////////ALGORITHM////////////////////////////////
+/////////////////ALGORITHM END/////////////////////////////
 
 
 /////////////////Add Champ from Service///////////////////
@@ -241,16 +275,16 @@ function HomeController ($http) {
 
   // Resets homepage champ selections
   vm.resetChamps = function(){
-    // vm.blue= [];
-    // vm.purple= [];
-    // vm.champs = [];
-    // vm.positionChamps = [];
-    // vm.count = 0;
-    // vm.lock = 0;
-    // vm.showResults = false;
-    // vm.showPositions = false;
-    // getChamps();
-    window.location="/";
+    vm.blue= [];
+    vm.purple= [];
+    vm.champs = [];
+    vm.positionChamps = [];
+    vm.count = 0;
+    vm.lock = 0;
+    vm.showResults = false;
+    vm.showPositions = false;
+    vm.champSelect = true;
+    getChamps();
   };
 
   vm.createComp = function(c1,c2,c3,c4,c5){
