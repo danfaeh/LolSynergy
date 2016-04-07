@@ -116,8 +116,8 @@ function MainController (Account) {
 
 }
 
-HomeController.$inject = ["$http"]; // minification protection
-function HomeController ($http) {
+HomeController.$inject = ["$http", "$window","$scope"]; // minification protection
+function HomeController ($http, $window, $scope) {
   var vm = this;
   vm.champs = [];
   vm.positionChamps = [];
@@ -243,7 +243,8 @@ function HomeController ($http) {
 // Adds Champ to Comp
   vm.addChamp = function(champ){
     if (vm.lock===0){
-      if (vm.blue.length === 5 || vm.purple.length === 5){
+      $scope.searchChamp = '';
+      if ((vm.blueStart === false && vm.purple.length === 5) || (vm.blueStart === true && vm.blue.length === 4 && vm.purple.length === 4)){
         vm.lock = 1;
       }else if(vm.blue.length === 0 && vm.purple.length === 0){
         vm.blueStart ? vm.blue.push(champ) : vm.purple.push(champ);
@@ -287,6 +288,26 @@ function HomeController ($http) {
     getChamps();
   };
 
+  vm.addChampFromSearch = function(champName){
+    name = champName.charAt(0).toUpperCase() + champName.slice(1);
+    console.log("champ", name);
+
+    var allChamps = vm.champs.length;
+    for (var z=0; z<allChamps; z++ ){
+      if (vm.champs[z].name === name){
+        champObject = vm.champs[z];
+        break;
+      }
+    }
+    console.log("champObject", champObject);
+    vm.addChamp(champObject);
+  }
+
+  vm.findCounter = function(champ){
+    console.log("inside find counter")
+    $window.open('https://www.google.com', '_blank');
+  }
+
   vm.createComp = function(c1,c2,c3,c4,c5){
     console.log('inside create');
     $http.post('/api/comps', vm.new_post)
@@ -308,7 +329,7 @@ function HomeController ($http) {
         for (var i=0;i<length;i++) {
           var imgUrl = champImg + champs[i].name + ".png";
           imgUrl = imgUrl.replace(/\s+/g, '-').replace(/'/,'').toLowerCase();
-          vm.champs.push({"name": champs[i].name, "img": imgUrl, position: champs[i].position, damage: champs[i].damage,  hardcc: champs[i].hardcc, tank: champs[i].tank, engage: champs[i].engage,   seige:champs[i].seige, waveclear:champs[i].waveclear, aram: champs[i].aram});
+          vm.champs.push({"name": champs[i].name, "img": imgUrl, position: champs[i].position, damage: champs[i].damage,  hardcc: champs[i].hardcc, softcc: champs[i].softcc, tank: champs[i].tank, engage: champs[i].engage,   seige:champs[i].seige, waveclear:champs[i].waveclear, aram: champs[i].aram});
         }
       });
   }
