@@ -70,6 +70,10 @@ body {
 	height: 140px;
 }
 
+.col-xs-4 {
+  height: 140px;
+}
+
 /*team comp container*/
 .champ {
 	background: linear-gradient(180deg, rgba(0,0,0,.7), #4D4D4D);
@@ -158,6 +162,22 @@ body {
 
 #editForm{
 	color:white;
+}
+
+#aram_info{
+  color:white;
+}
+
+#aram_frame{
+  margin-top: 20px;
+}
+
+.aramBtn{
+  margin-top: 3.5em;
+}
+
+#search{
+  color:black;
 }
 
 h5{

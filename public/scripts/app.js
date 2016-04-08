@@ -44,7 +44,13 @@ function configRoutes($stateProvider, $urlRouterProvider, $locationProvider) {
       templateUrl: 'templates/comps.html',
       controller: 'HomeController',
       controllerAs: 'champs'
-    })    
+    })
+    .state('aram', {
+      url: '/aram',
+      templateUrl: 'templates/aram.html',
+      controller: 'HomeController',
+      controllerAs: 'champs'
+    })          
     .state('signup', {
       url: '/signup',
       templateUrl: 'templates/signup.html',
@@ -159,6 +165,8 @@ function HomeController ($http, $window, $scope) {
     vm.hasWaveClear = 0;
     vm.hasCC = 0
     vm.hasEngage = false;
+
+    vm.comps = [];
 
 
       //Decides if team needs AP Damage or not
@@ -308,12 +316,12 @@ function HomeController ($http, $window, $scope) {
     $window.open('https://www.google.com', '_blank');
   }
 
-  vm.createComp = function(c1,c2,c3,c4,c5){
+  vm.createComp = function(){
     console.log('inside create');
-    $http.post('/api/comps', vm.new_post)
+    $http.post('/api/comps', vm.new_comp)
       .then(function(response){
         vm.comps.push(vm.new_comp);
-        vm.new_post = '';
+        vm.new_comp = '';
     });
   };
 

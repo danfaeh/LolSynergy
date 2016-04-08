@@ -2,11 +2,11 @@
 	<div class="row">
 		<div id="comp_list">
 			<div ng-repeat="comp in champs.comps" >
-				<img ng-src="{{comp.champ1}}">
-				<img ng-src="{{comp.champ2}}">
-				<img ng-src="{{comp.champ3}}">
-				<img ng-src="{{comp.champ4}}">
-				<img ng-src="{{comp.champ5}}">
+				<img ng-src="{{comp.c1}}">
+				<img ng-src="{{comp.c2}}">
+				<img ng-src="{{comp.c3}}">
+				<img ng-src="{{comp.c4}}">
+				<img ng-src="{{comp.c5}}">
 			</div>
 		</div>
 </div>
@@ -16,12 +16,13 @@
 <h2>Create A New Comp:</h2>
 <hr>
 
+<form ng-submit="champs.createComp()">
 <div class="container" id="compContainer">
-		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ1" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></div>
-		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ2" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></div>
-		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ3" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></div>
-		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ4" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></div>
-		<div class="champ col-xs-1"><img class="champ_pic" ng-model="champs.new_comp.champ5" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></div>
+		<div class="champ col-xs-1"><img class="champ_pic" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></div>
 
 		<h3 id="count_message">
 			<ng-pluralize count="champs.count"
@@ -33,9 +34,15 @@
 		                     	'5': 'Save Comp?'}">
 			</ng-pluralize>
 			<br>
-			<a ng-show="champs.blue.length>2" type="button" class="btn btn-primary" ng-click="champs.createComp()">Save</a>
+			<input ng-model="champs.new_comp.c1" class="form-control hidden" value="{{champs.blue[0].name}}">
+			<input ng-model="champs.new_comp.c2" class="form-control hidden" value="{{champs.purple[0].name}}">
+			<input ng-model="champs.new_comp.c3" class="form-control hidden" value="{{champs.purple[1].name}}">
+			<input ng-model="champs.new_comp.c4" class="form-control hidden" value="{{champs.blue[1].name}}">
+			<input ng-model="champs.new_comp.c5" class="form-control hidden" value="{{champs.blue[2].name}}">
+			<input ng-show="champs.blue.length>2" type="submit" value="Save Comp" class="btn btn-block btn-primary">
 		</h3>
 </div>
+</form>
 
 <div class="row">
 		<div id="champ_menu">

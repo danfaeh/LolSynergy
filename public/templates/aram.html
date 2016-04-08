@@ -1,0 +1,102 @@
+<!-- use an ng-repeat here on refactor -->
+	<div id="aram_frame" class="col-xs-4">
+		<div class="row">
+			<div id="p1" ng-class="{'picking': (champs.count===0)}" class="champ col-xs-offset-3 col-xs-4"><h4>Your Team</h4><a href="http://www.lolcounter.com/champions/{{champs.blue[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></a> 
+			</div>
+			<button ng-show="champs.blue[0].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.blue[0].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.blue[0].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+		</div>
+
+		<div class="row">
+			<div id="p2" ng-class="{'picking': (champs.count===1)}" class="champ col-xs-offset-3 col-xs-4"><a href="http://www.lolcounter.com/champions/{{champs.purple[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></a>
+			</div>
+			<button ng-show="champs.purple[0].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.purple[0].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.purple[0].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+		</div>
+
+		<div class="row">
+			<div id="p2" ng-class="{'picking': (champs.count===2)}" class="champ col-xs-offset-3 col-xs-4"><a href="http://www.lolcounter.com/champions/{{champs.purple[1].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></a>
+			</div>
+			<button ng-show="champs.purple[1].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.purple[1].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.purple[1].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+		</div>
+
+		<div class="row">
+			<div id="p2" ng-class="{'picking': (champs.count===3)}" class="champ col-xs-offset-3 col-xs-4"><a href="http://www.lolcounter.com/champions/{{champs.blue[1].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></a>
+			</div>
+			<button ng-show="champs.blue[1].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.blue[1].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.blue[1].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+		</div>
+
+		<div class="row">
+			<div id="p2" ng-class="{'picking': (champs.count===4)}" class="champ col-xs-offset-3 col-xs-4"><a href="http://www.lolcounter.com/champions/{{champs.blue[2].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></a>
+			</div>
+			<button ng-show="champs.blue[2].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.blue[2].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.blue[2].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+		</div>
+	</div>	
+
+<!-- 	<div class="row">
+	</div> -->
+
+<div class="container col-xs-6" id="aram_info">
+	<h2>ARAM</h2>
+	<hr>	
+
+		<h3 id="count_message">
+			<ng-pluralize count="champs.count"
+		     when="{'0': 'Select Your ARAM Team:',
+		         	'1': '4 more to go.',
+		         	'2': '3 more to go.',
+		         	'3': '2 more to go.',
+		         	'4': '1 more to go.',
+		         	'5': 'Rerolls / Trades'}">
+			</ng-pluralize>
+			<br>
+		</h3>
+
+	<div class="row">
+			<div id="champ_menu">
+				<form ng-submit="champs.addChampFromSearch(searchChamp)">
+			    <input id="search" ng-model="searchChamp" placeholder="Search a Champion!" autofocus />
+			    <button class="btn btn-info" ng-click="champs.resetChamps()">Reset</button>
+			    <input class="hide" type="submit">
+			  </form>
+				<div ng-repeat="champ in champs.champs | orderBy: 'name' | filter: searchChamp" >
+					<img class="champ_imgs morph" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+				</div>
+			</div>
+	</div>
+
+</div>
+
+
+<!-- <p ng-if="home.posts.length === 0">No posts yet.</p>
+
+<div ng-if="home.posts.length > 0">
+	<div ng-repeat="post in home.posts">
+		<p><strong>{{post.title}}</strong> - {{post.content}}</p><br>
+	</div>
+</div>
+
+<div ng-show="main.currentUser()">
+	<br>
+	<h4>Add New Post</h4>
+	<hr>
+
+<form ng-submit="home.createPost()" >
+	<div class="form-group">
+	  <input type="text" ng-model="home.new_post.title" class="form-control" placeholder="Title" value="{{main.currentUser().email}}">
+	</div>
+  <div class="form-group">
+    <textarea type="text" ng-model="home.new_post.content" class="form-control" placeholder="Content"></textarea>
+  </div>
+  <input type="submit" value="Create Post" class="btn btn-block btn-info">
+</form>
+
+</div> -->

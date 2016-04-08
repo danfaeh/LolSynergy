@@ -29,10 +29,8 @@ var Comp = require('./models/comp');
 var User = require('./models/user');
 var Champion = require('./models/champion');
 
-/*
- * API Routes
- */
 
+//Api Routes
 app.get('/api/me', auth.ensureAuthenticated, function (req, res) {
   User.findById(req.user, function (err, user) {
     res.send(user.populate('comps'));
@@ -62,12 +60,12 @@ app.get('/api/champs', function (req, res) {
 app.post('/api/comps', function(req,res){
   console.log('comp req', req.body);
   var comp = new Comp({
-  champ1: req.body.champ1,
-  champ2: req.body.champ2,
-  champ3: req.body.champ3,
-  champ4: req.body.champ4,
-  champ5: req.body.champ5,
-  description: req.body.description
+  c1: req.body.c1,
+  c2: req.body.c2,
+  c3: req.body.c3,
+  c4: req.body.c4,
+  c5: req.body.c5,
+  // description: req.body.description
   });
   comp.save(function(err,result){
     if (err) {
@@ -78,10 +76,7 @@ app.post('/api/comps', function(req,res){
     });
 });
 
-/*
- * Auth Routes
- */
-
+//Auth Routes
 app.post('/auth/signup', function (req, res) {
   User.findOne({ email: req.body.email }, function (err, existingUser) {
     if (existingUser) {
@@ -117,17 +112,13 @@ app.post('/auth/login', function (req, res) {
 });
 
 
-/*
- * Catch All Route
- */
-app.get(['/', '/signup', '/login', '/profile', '/comps', '/results'], function (req, res) {
+//Catch All Route
+app.get(['/', '/signup', '/login', '/profile', '/comps', '/aram'], function (req, res) {
   res.render('index');
 });
 
 
-/*
- * Listen on localhost:3000
- */
+//Listening on localhost:9000
 app.listen(9000, function() {
-  console.log('server started');
+  console.log('Listening on Localhost 9000');
 });

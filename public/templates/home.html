@@ -119,8 +119,7 @@
 		
 		<div class="row">
 			<div id="p1" ng-class="{'picking': (champs.count===0 && champs.blueStart === true) || (champs.count===1 && champs.blueStart === false)}" class="champ col-xs-2"><h4>Your Team</h4><a href="http://www.lolcounter.com/champions/{{champs.blue[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></a></div>
-			<div id="title" class="col-xs-8"></div>
-			<div id="p6" ng-class="{'picking': (champs.count===1 && champs.blueStart === true) || (champs.count===0 && champs.blueStart === false)}" class="champ col-xs-2"><h4>Enemy Team</h4><a href="http://www.lolcounter.com/champions/{{champs.purple[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></a></div>
+			<div id="p6" ng-class="{'picking': (champs.count===1 && champs.blueStart === true) || (champs.count===0 && champs.blueStart === false)}" class="champ col-xs-2 col-xs-offset-8"><h4>Enemy Team</h4><a href="http://www.lolcounter.com/champions/{{champs.purple[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></a></div>
 		</div>
 
 		<div class="row">
@@ -145,30 +144,5 @@
 
 	</div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      </div>
-      <div class="modal-body">
-
-			<div>
-				<h1>Here's who we'd recommend:  <button id="back_btn" class="btn btn-primary" ng-click="champs.showResults=false; champs.resetChamps()">Back</button></h1>
-						<div ng-repeat="(key, champ) in champs.bestChamps | orderBy: 'name'">
-							<h3>{{key+1}} : {{champ.name}}</h3>
-							<img class="best_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
-						</div>
-			</div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
