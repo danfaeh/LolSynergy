@@ -3,41 +3,41 @@
 		<div class="row">
 			<div id="p1" ng-class="{'picking': (champs.count===0)}" class="champ col-xs-offset-3 col-xs-4"><h4>Your Team</h4><a href="http://www.lolcounter.com/champions/{{champs.blue[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></a> 
 			</div>
-			<button ng-show="champs.blue[0].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
-			<button ng-show="champs.blue[0].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
-			<button ng-show="champs.blue[0].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+			<button ng-show="champs.count >4 && champs.blue[0].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.count >4 && champs.blue[0].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.count >4 && champs.blue[0].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
 		</div>
 
 		<div class="row">
 			<div id="p2" ng-class="{'picking': (champs.count===1)}" class="champ col-xs-offset-3 col-xs-4"><a href="http://www.lolcounter.com/champions/{{champs.purple[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></a>
 			</div>
-			<button ng-show="champs.purple[0].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
-			<button ng-show="champs.purple[0].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
-			<button ng-show="champs.purple[0].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+			<button ng-show="champs.count >4 && champs.purple[0].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.count >4 && champs.purple[0].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.count >4 && champs.purple[0].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
 		</div>
 
 		<div class="row">
 			<div id="p2" ng-class="{'picking': (champs.count===2)}" class="champ col-xs-offset-3 col-xs-4"><a href="http://www.lolcounter.com/champions/{{champs.purple[1].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></a>
 			</div>
-			<button ng-show="champs.purple[1].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
-			<button ng-show="champs.purple[1].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
-			<button ng-show="champs.purple[1].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+			<button ng-show="champs.count >4 && champs.purple[1].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.count >4 && champs.purple[1].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.count >4 && champs.purple[1].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
 		</div>
 
 		<div class="row">
 			<div id="p2" ng-class="{'picking': (champs.count===3)}" class="champ col-xs-offset-3 col-xs-4"><a href="http://www.lolcounter.com/champions/{{champs.blue[1].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></a>
 			</div>
-			<button ng-show="champs.blue[1].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
-			<button ng-show="champs.blue[1].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
-			<button ng-show="champs.blue[1].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+			<button ng-show="champs.count >4 && champs.blue[1].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.count >4 && champs.blue[1].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.count >4 && champs.blue[1].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
 		</div>
 
 		<div class="row">
 			<div id="p2" ng-class="{'picking': (champs.count===4)}" class="champ col-xs-offset-3 col-xs-4"><a href="http://www.lolcounter.com/champions/{{champs.blue[2].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></a>
 			</div>
-			<button ng-show="champs.blue[2].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
-			<button ng-show="champs.blue[2].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
-			<button ng-show="champs.blue[2].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
+			<button ng-show="champs.count >4 && champs.blue[2].aram > 2" class="col-xs-offset-1 col-xs-3 btn btn-success aramBtn">Play or Trade</button>
+			<button ng-show="champs.count >4 && champs.blue[2].aram == 2" class="col-xs-offset-1 col-xs-3 btn btn-warning aramBtn">Mid Tier</button>
+			<button ng-show="champs.count >4 && champs.blue[2].aram < 2" class="col-xs-offset-1 col-xs-3 btn btn-danger aramBtn">...plz Roll</button>
 		</div>
 	</div>	
 
