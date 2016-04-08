@@ -177,7 +177,7 @@ function HomeController ($http, $window, $scope) {
           if (vm.blue[i].seige === true){
             vm.hasSeige = true; //high
           }
-          if (vm.blue[i].hardcc > 0){
+          if (vm.blue[i].hardcc > 1){
             vm.hasCC ++; //medium
           }     
       }
@@ -194,12 +194,12 @@ function HomeController ($http, $window, $scope) {
         if (vm.champs[i].position === positionNeeded){
           if (needAP === true){
             vm.damageNeeded = "ap"
-            if (vm.champs[i].damage === "ap"){ 
+            if (vm.champs[i].damage === "ap" || vm.champs[i].tank ===true){ 
               vm.positionChamps.push(vm.champs[i]);
             }
           }else if (needAD === true){
             vm.damageNeeded = "ad"
-            if (vm.champs[i].damage === "ad"){ 
+            if (vm.champs[i].damage === "ad" || vm.champs[i].tank ===true){ 
               vm.positionChamps.push(vm.champs[i]);
             }
           }else{

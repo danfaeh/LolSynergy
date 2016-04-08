@@ -3,13 +3,12 @@
 				<button id="blueToggle" type="button" class="btn btn-success" aria-label="Left Align" ng-click="champs.blueStart = true">
 				  <span>First Pick</span>
 				</button>
-			<ng-pluralize count=champs.count
-		                 when="{'0': 'Select Your Team:',
-		                 				'1': 'Analyze My Comp:',
+			<ng-pluralize count=champs.count style="color:white;"
+		                 when="{'0': 'Select Your Team:', '1': 'Select Your Team:', '2': 'Select Your Team:',
+		                 				'3': 'Select Your Team:', '4': 'Select Your Team:',
 		                     	'other': 'Analyze My Comp'}">
 			</ng-pluralize>
 
-<!-- 			<button ng-show="champs.blue.length>3 || champs.purple.length>3" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Modal</button> -->
 			<a ng-show="champs.blue.length>=3 || champs.purple.length>=3" type="button" class="btn btn-primary btn-lg" ng-click="champs.positionMenu()">Analyze</a>
 
 				<button id="purpleToggle" type="button" class="btn btn-success" aria-label="Right Align" ng-click="champs.blueStart = false">
@@ -36,83 +35,80 @@
 <!-- Pick Position -->
 <div id="positions_wrapper" class="col-xs-6 col-xs-offset-3" ng-show="champs.showPositions">
 	<h1>Where Are You Going This Game?</h1>
-	<button class="btn btn-primary" ng-click="champs.results('top')">Top</button><br><br>
-	<button class="btn btn-primary" ng-click="champs.results('jungle')">Jungle</button><br><br>
-	<button class="btn btn-primary" ng-click="champs.results('mid')">Mid</button><br><br>
-	<button class="btn btn-primary" ng-click="champs.results('adc')">ADC</button><br><br>
-	<button class="btn btn-primary" ng-click="champs.results('support')">Support</button><br><br><br><br>
+		<img class="col-xs-12" id="map" src="../images/map.jpg" alt=""><br><br>
+	<button class="btn btn-primary" ng-click="champs.results('top')">Top</button>
+	<button class="btn btn-primary" ng-click="champs.results('jungle')">Jungle</button>
+	<button class="btn btn-primary" ng-click="champs.results('mid')">Mid</button>
+	<button class="btn btn-primary" ng-click="champs.results('adc')">ADC</button>
+	<button class="btn btn-primary" ng-click="champs.results('support')">Support</button><br><br>
 	<button id="back_btn" class="btn btn-primary" ng-click="champs.resetChamps()">Back</button>
 </div>	
 <!-- Pick Position -->
 
 <!-- RESULTS STUFF -->
 <div id="results_wrapper" class="col-xs-6 col-xs-offset-3" ng-show="champs.showResults">
-	<div ng-show="champs.hasWaveClear && champs.hasSeige && champs.hasEngage && champs.hasTank">
+	<div id="great_news" ng-show="champs.hasWaveClear > 1 && champs.hasSeige && champs.hasEngage && champs.hasTank">
 		<h1>Great News!</h1>
-		<h4>Your team has: Engage, WaveClear, Seige, and a Tank.</h4>
+		<h4>Your team has: CC, Engage, WaveClear, Seige, and a Tank.</h4>
 		<p>(Consider stacking additional Engage or CC) </p>
 	</div>
 	<div ng-hide="champs.hasWaveClear && champs.hasSeige && champs.hasEngage && champs.hasTank">
 	<h3>Your Team is Missing:</h3>
-	<p ng-hide="champs.hasTank">a Tank </p>
-	<p ng-hide="champs.hasEngage">Engage </p>
-	<p ng-hide="champs.hasSeige">Seige </p>
-	<p ng-hide="champs.hasWaveClear">Waveclear </p>
+		<div nowrap>
+			<p ng-hide="champs.hasCC > 1">-At least 2 hardCC </p>
+			<p ng-hide="champs.hasTank">-A Tank </p>
+			<p ng-hide="champs.hasEngage">-Engage </p>
+			<p ng-hide="champs.hasSeige">-Seige </p>
+			<p ng-hide="champs.hasWaveClear > 1">-Waveclear </p>
+		</div>
 	</div>
 
-	<h3 ng-hide="champs.damageNeeded">{{champs.position}}'s with Hard CC <button id="back_btn" class="btn btn-primary" ng-click="champs.resetChamps()">Back</button></h3>
-	<h3 ng-show="champs.damageNeeded">You seriously need {{champs.damageNeeded}}. Try one of these: <button id="back_btn" class="btn btn-primary" ng-click="champs.resetChamps()">Back</button></h3>
+	<h4 id="damage_needed" ng-show="champs.damageNeeded">You seriously need {{champs.damageNeeded}}.</h4>
+	<button id="back_btn" class="btn btn-primary" ng-click="champs.resetChamps()">Back</button>
 
-		<div class="col-xs-12" ng-hide="champs.hasCC"> {{champs.position}}'s with CC: 
-			<div ng-repeat="(key, champ) in champs.ccChamps | orderBy: 'name'">
-				<!-- <h3>{{champ.name}}</h3> -->
-				<img class="result_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
-			</div>
-		</div>
-
-		<div class="col-xs-12" ng-hide="champs.hasTank"> {{champs.position}} Tanks
+		<div class="col-xs-12 category_title" ng-hide="champs.hasTank"> <h5>Tank {{champs.position}}'s</h5>
 			<div ng-repeat="(key, champ) in champs.tankChamps | orderBy: 'name'">
 				<!-- <h3>{{champ.name}}</h3> -->
 				<img class="result_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
 			</div>
 		</div>
 
-		<div class="col-xs-12" ng-hide="champs.hasEngage"> {{champs.position}}'s with Engage
+		<div class="col-xs-12 category_title" ng-hide="champs.hasEngage"> <h5>{{champs.position}}'s with Engage</h5>
 			<div ng-repeat="(key, champ) in champs.engageChamps | orderBy: 'name'">
 				<!-- <h3>{{champ.name}}</h3> -->
 				<img class="result_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
 			</div>
 		</div>	
 
-		<div class="col-xs-12" ng-hide="champs.hasSeige"> {{champs.position}}'s with Seige
+		<div class="col-xs-12 category_title" ng-hide="champs.hasSeige"> <h5>{{champs.position}}'s with Seige</h5>
 			<div ng-repeat="(key, champ) in champs.seigeChamps | orderBy: 'name'">
 				<!-- <h3>{{champ.name}}</h3> -->
 				<img class="result_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
 			</div>
 		</div>
 
-		<div class="col-xs-12" ng-hide="champs.hasWaveClear > 1"> {{champs.position}}'s with WaveClear
+		<div class="col-xs-12 category_title" ng-hide="champs.hasWaveClear > 1"> <h5>{{champs.position}}'s with WaveClear</h5>
 			<div ng-repeat="(key, champ) in champs.waveClearChamps | orderBy: 'name'">
 				<!-- <h3>{{champ.name}}</h3> -->
 				<img class="result_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
 			</div>
 		</div>
 
-		<div class="col-xs-12" ng-show="champs.hasWaveClear && champs.hasSeige && champs.hasEngage && champs.hasTank"> {{champs.position}}'s with additional CC
-			<div ng-repeat="(key, champ) in champs.ccChamps | orderBy: 'name'">
+		<div class="col-xs-12 category_title" ng-show="champs.hasWaveClear > 1 && champs.hasSeige && champs.hasEngage && champs.hasTank"> <h5>{{champs.position}}'s with engage</h5>
+			<div ng-repeat="(key, champ) in champs.engageChamps | orderBy: 'name'">
+				<!-- <h3>{{champ.name}}</h3> -->
+				<img class="result_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+			</div>
+		</div><br><br>
+
+		<div class="col-xs-12 category_title"> <h5>{{champs.position}}'s with most CC</h5>
+			<div ng-repeat="(key, champ) in champs.ccChamps | orderBy: '-(hardcc + softcc)'">
 				<!-- <h3>{{champ.name}}</h3> -->
 				<div class="champBox" nowrap>
 					<img class="result_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
 					<p>SoftCC: {{champ.softcc}}</p>
 					<p>HardCC: {{champ.hardcc}}</p>
 			 	</div>
-			</div>
-		</div>
-
-		<div class="col-xs-12" ng-show="champs.hasWaveClear && champs.hasSeige && champs.hasEngage && champs.hasTank"> {{champs.position}}'s' with engage
-			<div ng-repeat="(key, champ) in champs.engageChamps | orderBy: 'name'">
-				<!-- <h3>{{champ.name}}</h3> -->
-				<img class="result_imgs" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
 			</div>
 		</div>
 			
