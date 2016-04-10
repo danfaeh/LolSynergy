@@ -4,8 +4,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     hbs = require('hbs'),
     mongoose = require('mongoose'),
-    auth = require('./resources/auth');
-    var port = process.env.PORT || 3000;
+    auth = require('./resources/auth'),
+    env = process.env.NODE_ENV = process.env.NODE_ENV || "development",
+    port = process.env.PORT || 3000;
 
 // require and load dotenv
 require('dotenv').load();
@@ -21,9 +22,15 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'hbs');
 
 // connect to mongodb
-mongoose.connect('mongodb://localhost/lol-synergy');
-  process.on('exit', function() {mongoose.disconnect();
-});
+if (env === "development") {
+  mongoose.connect("mongodb://localhost/lol-synergy");
+}else {
+  mongoose.connect("mongodb://danfaeh:Saxophone13@ds053178.mongolab.com:53178/lol-synergy")
+}
+
+// mongoose.connect('mongodb://localhost/lol-synergy');
+//   process.on('exit', function() {mongoose.disconnect();
+// });
 
 // require User and Post models
 var Comp = require('./models/comp');

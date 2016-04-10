@@ -1,6 +1,12 @@
 var mongoose = require('mongoose');
-var conn = mongoose.connect('mongodb://localhost/lol-synergy');
+// var conn = mongoose.connect('mongodb://localhost/lol-synergy');
 var Champion = require("../models/Champion");
+
+if (env === ‘development’) {
+  mongoose.connect('mongodb://localhost/lol-synergy');
+}else {
+  mongoose.connect('mongodb://danfaeh:Saxophone13@ds053178.mongolab.com:53178/lol-synergy)'
+}
 
 //clears all database entries.
 Champion.remove({}, function(err) {
