@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-// var conn = mongoose.connect('mongodb://localhost/lol-synergy');
 var Champion = require("../models/Champion");
 
 if (env === ‘development’) {

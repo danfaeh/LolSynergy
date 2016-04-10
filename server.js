@@ -35,7 +35,7 @@ if (env === "development") {
 // require User and Post models
 var Comp = require('./models/comp');
 var User = require('./models/user');
-var Champion = require('./models/champion');
+var Champion = require('./models/Champion');
 
 
 //Api Routes
