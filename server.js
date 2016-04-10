@@ -5,6 +5,7 @@ var express = require('express'),
     hbs = require('hbs'),
     mongoose = require('mongoose'),
     auth = require('./resources/auth');
+    var port = process.env.PORT || 3000;
 
 // require and load dotenv
 require('dotenv').load();
@@ -119,6 +120,6 @@ app.get(['/', '/signup', '/login', '/profile', '/comps', '/aram'], function (req
 
 
 //Listening on localhost:9000
-app.listen(9000, function() {
-  console.log('Listening on Localhost 9000');
+app.listen(port, function() {
+  console.log('Listening on Localhost', port);
 });

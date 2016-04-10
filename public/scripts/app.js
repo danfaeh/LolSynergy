@@ -10,9 +10,7 @@ angular
   .controller('SignupController', SignupController)
   .controller('LogoutController', LogoutController)
   .controller('ProfileController', ProfileController)
-  // .service("Service1", Service1)
   .service('Account', Account)
-  // .factory('Algorithm', Algorithm)
   .config(configRoutes)
   ;
 
@@ -236,17 +234,6 @@ function HomeController ($http, $window, $scope) {
       }
 
 };
-/////////////////ALGORITHM END/////////////////////////////
-
-
-/////////////////Add Champ from Service///////////////////
-// vm.champClick = function(champ){
-//   vm.champClicked = champ;
-//   vm.blue = Service1.addChamp(vm.champClicked); 
-//   var index = vm.champs.indexOf(champ);
-//   vm.champs.splice(index,1);
-// };
-/////////////////Add Champ from Service///////////////////
 
 // Adds Champ to Comp
   vm.addChamp = function(champ){
