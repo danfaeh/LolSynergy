@@ -25,7 +25,7 @@ app.set('view engine', 'hbs');
 if (env === "development") {
   mongoose.connect("mongodb://localhost/lol-synergy");
 }else {
-  mongoose.connect("mongodb://danfaeh:Saxophone13@ds053178.mongolab.com:53178/lol-synergy")
+    mongoose.connect('mongodb://heroku_p32k5v7b:aefrjsj6s33gojrpp529urm4sg@ds019970.mlab.com:19970/heroku_p32k5v7b')
 }
 
 // mongoose.connect('mongodb://localhost/lol-synergy');
