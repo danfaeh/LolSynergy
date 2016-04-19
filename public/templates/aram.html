@@ -64,7 +64,7 @@
 			<div id="champ_menu">
 				<form ng-submit="champs.addChampFromSearch(searchChamp)">
 			    <input id="search" ng-model="searchChamp" placeholder="Search a Champion!" autofocus />
-			    <button class="btn btn-info" ng-click="champs.resetChamps()">Reset</button>
+			    <button class="btn btn-danger" ng-click="champs.resetChamps()">Reset</button>
 			    <input class="hide" type="submit">
 			  </form>
 				<div ng-repeat="champ in champs.champs | orderBy: 'name' | filter: searchChamp" >

@@ -1,21 +1,3 @@
-var mongoose = require('mongoose');
-var Champion = require("../models/Champion");
-var env = process.env.NODE_ENV = process.env.NODE_ENV || "development";
-
-// if (env === ‘development’) {
-//   mongoose.connect('mongodb://localhost/lol-synergy');
-// }else {
-  // mongoose.connect('mongodb://danfaeh:Saxophone13@ds053178.mongolab.com:53178/lol-synergy')
-    mongoose.connect('mongodb://heroku_p32k5v7b:aefrjsj6s33gojrpp529urm4sg@ds019970.mlab.com:19970/heroku_p32k5v7b');
-// }
-
-//clears all database entries.
-Champion.remove({}, function(err) {
-  if (err) {
-    console.log("ERROR:", err);
-  }
-});
-
  var champions = [
   {name: "Aatrox",       position: "top",     damage: "ad", softcc: 1, hardcc: 1,   tank: false,  engage: true,     seige:false,  waveclear:true,     aram: "1"},  
   {name: "Ahri",         position: "mid",     damage: "ap", softcc: 0, hardcc: 1,   tank: false,  engage: true,     seige:true,   waveclear:true,     aram: "3"},
@@ -150,11 +132,4 @@ Champion.remove({}, function(err) {
   ];
 
 
-Champion.create(champions, function(err, docs) {
-  if (err) {
-    console.log("ERROR:", err);
-  } else {
-    console.log("Created:", docs);
-    mongoose.connection.close();
-  }
-});
+

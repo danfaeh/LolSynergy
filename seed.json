@@ -1,0 +1,4 @@
+{
+	"development": "mongodb://localhost/lol-synergy",
+	"production": "mongodb://heroku_p32k5v7b:aefrjsj6s33gojrpp529urm4sg@ds019970.mlab.com:19970/heroku_p32k5v7b"
+}

@@ -1,35 +1,36 @@
-	<div id="menu_wrapper" class="col-xs-6 col-xs-offset-3" ng-show="champs.champSelect">
+	<div id="menu_wrapper" class="col-xs-4 col-xs-offset-4 col-sm-6 col-sm-offset-3" ng-show="champs.champSelect">
 		<h3 id="count_message">
 				<button id="blueToggle" type="button" class="btn btn-success" aria-label="Left Align" ng-click="champs.blueStart = true">
 				  <span>First Pick</span>
 				</button>
-			<ng-pluralize count=champs.count style="color:white;"
-		                 when="{'0': 'Select Your Team:', '1': 'Select Your Team:', '2': 'Select Your Team:',
-		                 				'3': 'Select Your Team:', '4': 'Select Your Team:',
-		                     	'other': 'Analyze My Comp'}">
+			<ng-pluralize count=champs.blue.length style="color:white;"
+		                 when="{'0': 'Select Your Team:', '1': 'Select 2 Champions:'}">
+<!-- 		                 			  '2': 'Select Your Team:',
+		                 				'3': 'Select Your Team:',
+		                     	'other': 'Analyze Team'}"> -->
 			</ng-pluralize>
 
-			<a ng-show="champs.blue.length>=3 || champs.purple.length>=3" type="button" class="btn btn-primary btn-lg" ng-click="champs.positionMenu()">Analyze</a>
+			<a ng-show="champs.blue.length>=2" type="button" id="analyze_btn" class="btn btn-lg" ng-click="champs.positionMenu()">Analyze Team</a>
 
 				<button id="purpleToggle" type="button" class="btn btn-success" aria-label="Right Align" ng-click="champs.blueStart = false">
 				  <span>First Pick</span>
 				</button>
 		</h3>
 		
-<div class="row">
-		<div id="champ_menu">
-		<form ng-submit="champs.addChampFromSearch(searchChamp)">
-	    <input id="search" ng-model="searchChamp" placeholder="Search a Champion!" autofocus /><br><br>
-	    <input class="hide" type="submit">
-	  </form>
-	    <button class="btn btn-danger" ng-click="champs.resetChamps()">Reset All</button>
-			<div ng-repeat="champ in champs.champs | orderBy: 'name' | filter: searchChamp">
-				<img class="champ_imgs morph" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
-			</div>
+		<div class="row">
+				<div id="champ_menu">
+				<form ng-submit="champs.addChampFromSearch(searchChamp)" nowrap>
+			    <input id="search" ng-model="searchChamp" placeholder="Search a Champion!" autofocus />
+			    <input class="hide" type="submit">
+			    <button class="btn btn-danger" ng-click="champs.resetChamps()">Reset All</button>
+			  </form>
+					<div ng-repeat="champ in champs.champs | orderBy: 'name' | filter: searchChamp">
+						<img class="champ_imgs morph" ng-click="champs.addChamp(champ)" ng-src="{{champ.img}}">
+					</div>
+				</div>
 		</div>
-</div>
 
-<br><br><br>
+	<br><br><br>
 </div>
 
 <!-- Pick Position -->
@@ -63,7 +64,7 @@
 		</div>
 	</div>
 
-	<h4 id="damage_needed" ng-show="champs.damageNeeded">You seriously need {{champs.damageNeeded}}.</h4>
+	<h4 id="damage_needed" ng-show="champs.damageNeeded">We seriously need {{champs.damageNeeded}}.</h4>
 	<button id="back_btn" class="btn btn-primary" ng-click="champs.resetChamps()">Back</button>
 
 		<div class="col-xs-12 category_title" ng-hide="champs.hasTank"> <h5>Tank {{champs.position}}'s</h5>
@@ -118,28 +119,28 @@
 	<div id="frame" class="container">
 		
 		<div class="row">
-			<div id="p1" ng-class="{'picking': (champs.count===0 && champs.blueStart === true) || (champs.count===1 && champs.blueStart === false)}" class="champ col-xs-2"><h4>Your Team</h4><a href="http://www.lolcounter.com/champions/{{champs.blue[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></a></div>
-			<div id="p6" ng-class="{'picking': (champs.count===1 && champs.blueStart === true) || (champs.count===0 && champs.blueStart === false)}" class="champ col-xs-2 col-xs-offset-8"><h4>Enemy Team</h4><a href="http://www.lolcounter.com/champions/{{champs.purple[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></a></div>
+			<div id="p1" ng-class="{'picking': (champs.count===0 && champs.blueStart === true) || (champs.count===1 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2"><h6 class="teamTitle">Your Team</h6><a href="http://www.lolcounter.com/champions/{{champs.blue[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[0].img?champs.blue[0].img:' '}}"></a></div>
+			<div id="p6" ng-class="{'picking': (champs.count===1 && champs.blueStart === true) || (champs.count===0 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2 col-sm-offset-8 col-xs-offset-6"><h6 class="teamTitle">Enemy Team</h6><a href="http://www.lolcounter.com/champions/{{champs.purple[0].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[0].img?champs.purple[0].img:' '}}"></a></div>
 		</div>
 
 		<div class="row">
-			<div id="p2" ng-class="{'picking': (champs.count=== 3 && champs.blueStart === true) || (champs.count===2 && champs.blueStart === false)}" class="champ col-xs-2"><a href="http://www.lolcounter.com/champions/{{champs.blue[1].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></a></div>
-			<div id="p7" ng-class="{'picking': (champs.count===2 && champs.blueStart === true) || (champs.count===3 && champs.blueStart === false)}" class="champ col-xs-2 col-xs-offset-8"><a href="http://www.lolcounter.com/champions/{{champs.purple[1].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></a></div>
+			<div id="p2" ng-class="{'picking': (champs.count=== 3 && champs.blueStart === true) || (champs.count===2 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2"><a href="http://www.lolcounter.com/champions/{{champs.blue[1].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[1].img?champs.blue[1].img:' '}}"></a></div>
+			<div id="p7" ng-class="{'picking': (champs.count===2 && champs.blueStart === true) || (champs.count===3 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2 col-sm-offset-8 col-xs-offset-6"><a href="http://www.lolcounter.com/champions/{{champs.purple[1].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[1].img?champs.purple[1].img:' '}}"></a></div>
 		</div>
 
 		<div class="row">
-			<div id="p3" ng-class="{'picking': (champs.count===4 && champs.blueStart === true) || (champs.count===5 && champs.blueStart === false)}" class="champ col-xs-2"><a href="http://www.lolcounter.com/champions/{{champs.blue[2].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></div>
-			<div id="p8" ng-class="{'picking': (champs.count===5 && champs.blueStart === true) || (champs.count===4 && champs.blueStart === false)}" class="champ col-xs-2 col-xs-offset-8"><a href="http://www.lolcounter.com/champions/{{champs.purple[2].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[2].img?champs.purple[2].img:' '}}"></a></div>
+			<div id="p3" ng-class="{'picking': (champs.count===4 && champs.blueStart === true) || (champs.count===5 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2"><a href="http://www.lolcounter.com/champions/{{champs.blue[2].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[2].img?champs.blue[2].img:' '}}"></div>
+			<div id="p8" ng-class="{'picking': (champs.count===5 && champs.blueStart === true) || (champs.count===4 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2 col-sm-offset-8 col-xs-offset-6"><a href="http://www.lolcounter.com/champions/{{champs.purple[2].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[2].img?champs.purple[2].img:' '}}"></a></div>
 		</div>
 
 		<div class="row">
-			<div id="p4" ng-class="{'picking': (champs.count===7 && champs.blueStart === true) || (champs.count===6 && champs.blueStart === false)}" class="champ col-xs-2"><a href="http://www.lolcounter.com/champions/{{champs.blue[3].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[3].img?champs.blue[3].img:' '}}"></a></div>
-			<div id="p9" ng-class="{'picking': (champs.count===6 && champs.blueStart === true) || (champs.count===7 && champs.blueStart === false)}" class="champ col-xs-2 col-xs-offset-8"><a href="http://www.lolcounter.com/champions/{{champs.purple[3].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[3].img?champs.purple[3].img:' '}}"></a></div>
+			<div id="p4" ng-class="{'picking': (champs.count===7 && champs.blueStart === true) || (champs.count===6 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2"><a href="http://www.lolcounter.com/champions/{{champs.blue[3].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[3].img?champs.blue[3].img:' '}}"></a></div>
+			<div id="p9" ng-class="{'picking': (champs.count===6 && champs.blueStart === true) || (champs.count===7 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2 col-sm-offset-8 col-xs-offset-6"><a href="http://www.lolcounter.com/champions/{{champs.purple[3].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[3].img?champs.purple[3].img:' '}}"></a></div>
 		</div>
 
 		<div class="row">
-			<div id="p5" ng-class="{'picking': (champs.count===8 && champs.blueStart === true) || (champs.count===9 && champs.blueStart === false)}" class="champ col-xs-2"><a href="http://www.lolcounter.com/champions/{{champs.blue[4].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[4].img?champs.blue[4].img:' '}}"></a></div>
-			<div id="p10" ng-class="{'picking': (champs.count===9 && champs.blueStart === true) || (champs.count===8 && champs.blueStart === false)}" class="champ col-xs-2 col-xs-offset-8"><a href="http://www.lolcounter.com/champions/{{champs.purple[4].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[4].img?champs.purple[4].img:' '}}"></a></div>
+			<div id="p5" ng-class="{'picking': (champs.count===8 && champs.blueStart === true) || (champs.count===9 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2"><a href="http://www.lolcounter.com/champions/{{champs.blue[4].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.blue[4].img?champs.blue[4].img:' '}}"></a></div>
+			<div id="p10" ng-class="{'picking': (champs.count===9 && champs.blueStart === true) || (champs.count===8 && champs.blueStart === false)}" class="champ col-xs-3 col-sm-2 col-sm-offset-8 col-xs-offset-6"><a href="http://www.lolcounter.com/champions/{{champs.purple[4].name}}" target="_blank"><img class="champ_pic" ng-src="{{champs.purple[4].img?champs.purple[4].img:' '}}"></a></div>
 		</div>
 
 	</div>

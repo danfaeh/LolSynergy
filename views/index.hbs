@@ -5,14 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="/">
 
-  <!-- Bower Components 
-  <link type="text/css" rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="styles/main.css">
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>-->
-
   <!-- bootstrap css -->
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
@@ -37,7 +29,6 @@
   <!-- Satellizer CDN -->
   <script src="//cdn.jsdelivr.net/satellizer/0.14.0/satellizer.min.js"></script>
   <!-- custom script (angular app) -->
-  <!--<script type="text/javascript" src="scripts/service.js"></script>-->
   <script type="text/javascript" src="scripts/app.js"></script>
   <script src="scripts/index.js"></script>
 
@@ -57,14 +48,15 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/aram">ARAM</a></li>
+          <li><a href="/aram"></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li ng-show="!main.currentUser()"><a ui-sref="signup">Sign Up</a></li>
+          <li><a href="/aram">ARAM</a></li>
+{{!--           <li ng-show="!main.currentUser()"><a ui-sref="signup">Sign Up</a></li>
           <li ng-show="!main.currentUser()"><a ui-sref="login">Log In</a></li>
-          {{!-- <li ng-show="main.currentUser()"><a href="/comps">My Comps</a></li> --}}
           <li ng-show="main.currentUser()"><a ui-sref="profile">\{{main.currentUser().displayName}}</a></li>
-          <li ng-show="main.currentUser()"><a ui-sref="logout">Log Out</a></li>
+          <li ng-show="main.currentUser()"><a ui-sref="logout">Log Out</a></li> --}}
+          {{!-- <li ng-show="main.currentUser()"><a href="/comps">My Comps</a></li> --}}
         </ul>
       </div>
     </div>
@@ -73,6 +65,8 @@
   <div id="page_content" class="container-fluid">
     <ui-view>
   </div>
+
+{{!-- Playing with background Music --}}
 
 {{!-- <iframe class="hidden" width="420" height="315" src="https://www.youtube.com/embed/QzyacJhM5Cs?autoplay=1" frameborder="0"></iframe> --}}
 
