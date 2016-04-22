@@ -140,7 +140,7 @@ Champion.remove({}, function(err) {
   {name: "Wukong",       position: "top",     damage: "ad", softcc: 0, hardcc: 1,   tank: false,  engage: true,     seige:true,   waveclear:true,     aram: "3"}, 
   {name: "Xerath",       position: "mid",     damage: "ap", softcc: 1, hardcc: 1,   tank: false,  engage: false,    seige:false,  waveclear:true,     aram: "3"},
   {name: "Xin Zhao",     position: "jungle",  damage: "ad", softcc: 1, hardcc: 2,   tank: false,  engage: true,     seige:true,   waveclear:false,    aram: "2"},
-  {name: "Yasuo",        position: "mid",     damage: "ad", softcc: 0, hardcc: 1,   tank: false,  engage: true,     seige:true,   waveclear:true,     aram: "2"},
+  {name: "Yasuo",        position: "mid",     damage: "ad", softcc: 0, hardcc: 1,   tank: false,  engage: true,     seige:true,   waveclear:false,     aram: "2"},
   {name: "Yorick",       position: "top",     damage: "ad", softcc: 1, hardcc: 0,   tank: true,   engage: false,    seige:false,  waveclear:true,     aram: "1"},  
   {name: "Zac",          position: "jungle",  damage: "ap", softcc: 1, hardcc: 2,   tank: true,   engage: true,     seige:false,  waveclear:false,    aram: "2"},
   {name: "Zed",          position: "mid",     damage: "ad", softcc: 1, hardcc: 0,   tank: false,  engage: false,    seige:true,   waveclear:true,     aram: "2"},
