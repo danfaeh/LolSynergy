@@ -143,7 +143,7 @@ function HomeController ($http, $window, $scope) {
   vm.positionMenu = function(){
     vm.showPositions = true;
     vm.champSelect = false;
-  }
+  };
 
   vm.results = function(positionNeeded){
     vm.showPositions = false;
@@ -161,7 +161,7 @@ function HomeController ($http, $window, $scope) {
     vm.hasTank = false;
     vm.hasSeige = false;
     vm.hasWaveClear = 0;
-    vm.hasCC = 0
+    vm.hasCC = 0;
     vm.hasEngage = false;
 
     vm.comps = [];

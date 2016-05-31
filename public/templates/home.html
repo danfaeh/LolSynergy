@@ -4,10 +4,7 @@
 				  <span>First Pick</span>
 				</button>
 			<ng-pluralize count=champs.blue.length style="color:white;"
-		                 when="{'0': 'Select Your Team:', '1': 'Select 2 Champions:'}">
-<!-- 		                 			  '2': 'Select Your Team:',
-		                 				'3': 'Select Your Team:',
-		                     	'other': 'Analyze Team'}"> -->
+		          when="{'0': 'Select Your Team:', '1': 'Select 2 Champions:'}">
 			</ng-pluralize>
 
 			<a ng-show="champs.blue.length>=2" type="button" id="analyze_btn" class="btn btn-lg" ng-click="champs.positionMenu()">Analyze Team</a>

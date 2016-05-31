@@ -1,0 +1,5 @@
+Heroku Seed Instructions:
+
+1. $ heroku addons:open mongolab.
+2. delete entire collection.
+3. $ mongoimport -h ds019970.mlab.com:19970 -d heroku_p32k5v7b -c champions -u heroku_p32k5v7b -p aefrjsj6s33gojrpp529urm4sg --file seeds/champions.json --jsonArray

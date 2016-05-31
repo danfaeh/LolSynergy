@@ -1,4 +1,4 @@
- var champions = [
+  [
   {name: "Aatrox",       position: "top",     damage: "ad", softcc: 1, hardcc: 1,   tank: false,  engage: true,     seige:false,  waveclear:true,     aram: "1"},  
   {name: "Ahri",         position: "mid",     damage: "ap", softcc: 0, hardcc: 1,   tank: false,  engage: true,     seige:true,   waveclear:true,     aram: "3"},
   {name: "Akali",        position: "mid",     damage: "ap", softcc: 1, hardcc: 0,   tank: false,  engage: true,     seige:false,  waveclear:false,    aram: "1"},
@@ -129,7 +129,4 @@
   {name: "Ziggs",        position: "mid",     damage: "ap", softcc: 1, hardcc: 1,   tank: false,  engage: false,    seige:true,   waveclear:true,     aram: "3"},           
   {name: "Zilean",       position: "support", damage: "ap", softcc: 1, hardcc: 1,   tank: false,  engage: false,    seige:false,  waveclear:true,     aram: "3"},
   {name: "Zyra",         position: "support", damage: "ap", softcc: 1, hardcc: 1,   tank: false,  engage: true,     seige:true,   waveclear:true,     aram: "2"}
-  ];
-
-
-
+  ]
